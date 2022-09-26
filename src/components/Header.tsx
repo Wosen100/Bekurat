@@ -71,7 +71,7 @@ function Header() {
             <NavLink to="/dashboard">Dashboard</NavLink>
           </li>
           <li>
-            <NavLink to="/landing">Home</NavLink>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
             <NavLink to="/Donors">Donors</NavLink>
@@ -82,21 +82,22 @@ function Header() {
 
           {user ? (
             <li>
-              <NavLink to="/landing/signout">Sign Out</NavLink>
+              <NavLink to="/signout">Sign Out</NavLink>
             </li>
           ) : (
             <>
               <li>
-                <NavLink to="/landing/signin">Sign In</NavLink>
+                <NavLink to="/signin">Sign In</NavLink>
               </li>
               <li>
-                <NavLink to="/landing/signup">Sign Up</NavLink>
+                <NavLink to="/signup">Sign Up</NavLink>
               </li>
             </>
           )}
         </ul>
       </NavWrapper>
 
+            
       <MainHeaderWrapper>
         <h1>
           Welcome to <strong>Asrat</strong>

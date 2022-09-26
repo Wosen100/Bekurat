@@ -4,14 +4,21 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const bodyParser = require('body-parser')
 
 const User = require("./models/User");
 
+const beneficiaryRoute = require("./routes/beneficiary")
+
 const serverApp = express();
 serverApp.use(cors());
+serverApp.use(bodyParser.urlencoded({extended:true}))
+
+serverApp.use("/beneficiary",beneficiaryRoute)
 
 dotenv.config({ path: "./config/config.env" });
 const connectDB = require("./config/db.js");
+
 
 // load env variables
 

@@ -5,6 +5,7 @@ import HeaderAndFooterWrapper from "../components/HeaderAndFooterWrapper";
 import SingleBeneficiaryCard from "../components/beneficiary/SingleBeneficiaryCard";
 import FullScreenDialogCustom from "../components/common/FullScreenDialogCustom";
 import RegisterBeneficiary from "./beneficiary/RegisterBeneficiary";
+import axios from 'axios'
 
 const beneficiaryList = [{
   name: "Jone Doe",
@@ -24,6 +25,18 @@ const beneficiaryList = [{
 }]
 
 const Beneficiary = () => {
+
+  const [beneficiaryData,setBeneficiaryData]= React.useState<any[]>([]);
+
+  React.useEffect(()=>{
+    axios.get("http://localhost:5001/beneficiary/get").then((response)=>{
+      console.log(response);
+      setBeneficiaryData(response.data.beneficiaries)
+    }).catch((e)=>{
+
+    })
+  },[])
+
   return <div>
     <HeaderAndFooterWrapper>
       <Grid container>
@@ -39,9 +52,9 @@ const Beneficiary = () => {
       </Grid>
 
       <Grid container spacing={1}>
-        {beneficiaryList.map((val, key) => {
+        {beneficiaryData.length>0&&beneficiaryData.map((val, key) => {
           return <Grid item xs={6} sm={4} key={key}>
-            <SingleBeneficiaryCard name={val.name} reason={val.reason} address={val.address} image={val.image}/>
+            <SingleBeneficiaryCard name={val.name} reason={val.description} address={val.address} image={val.image}/>
           </Grid>
         })}
       </Grid>

@@ -14,7 +14,7 @@ const serverApp = express();
 serverApp.use(cors());
 serverApp.use(bodyParser.urlencoded({extended:true}))
 
-serverApp.use("/beneficiary",beneficiaryRoute)
+
 
 dotenv.config({ path: "./config/config.env" });
 const connectDB = require("./config/db.js");
@@ -27,6 +27,7 @@ serverApp.use(express.json());
 // connect database
 connectDB();
 
+serverApp.use("/beneficiary",beneficiaryRoute)
 serverApp.get("/", function (request, response) {
   response.send("hi, I am server");
 });

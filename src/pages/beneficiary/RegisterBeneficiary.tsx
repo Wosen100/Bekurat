@@ -16,10 +16,9 @@ export default function RegisterBeneficiary() {
 
     const handleSubmit = () => {
         axios.post("http://localhost:5001/beneficiary/add",{
-            beneficiaryObj
+           ...beneficiaryObj
         }).then((response)=>{
             console.log(response);
-            
         })
         console.log(beneficiaryObj);
     }

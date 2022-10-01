@@ -1,66 +1,59 @@
-
 import React from "react";
 import { Grid, Typography, Button, Card } from "@mui/material";
 import HeaderAndFooterWrapper from "../components/HeaderAndFooterWrapper";
 import SingleBeneficiaryCard from "../components/beneficiary/SingleBeneficiaryCard";
 import FullScreenDialogCustom from "../components/common/FullScreenDialogCustom";
 import RegisterBeneficiary from "./beneficiary/RegisterBeneficiary";
-import axios from 'axios'
-
-const beneficiaryList = [{
-  name: "Jone Doe",
-  reason: "some reason",
-  address: "some address",
-  image:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-}, {
-  name: "Maxwel Plank",
-  reason: "some reason",
-  address: "some address",
-  image:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-}, {
-  name: "James Chadvik",
-  reason: "some reason",
-  address: "some country",
-  image:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-}]
+import { useDispatch, useSelector } from "react-redux";
+import { getBeneficiaries } from "../store/slices/beneficiarySlice";
+import { AppDispatch, RootState } from "../store";
 
 const Beneficiary = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const beneficiaryList = useSelector(
+    (state: RootState) => state.bene.beneficiaryList
+  );
 
-  const [beneficiaryData,setBeneficiaryData]= React.useState<any[]>([]);
+  React.useEffect(() => {
+    dispatch(getBeneficiaries());
+  }, []);
 
-  React.useEffect(()=>{
-    axios.get("http://localhost:5001/beneficiary/get").then((response)=>{
-      console.log(response);
-      setBeneficiaryData(response.data.beneficiaries)
-    }).catch((e)=>{
-
-    })
-  },[])
-
-  return <div>
-    <HeaderAndFooterWrapper>
-      <Grid container>
-        <Grid item xs={10}>
-          <Typography> Beneficiary </Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <FullScreenDialogCustom mainLayout={<RegisterBeneficiary/>}>
-          <Button> Register </Button>
-          </FullScreenDialogCustom>
-         
-        </Grid>
-      </Grid>
-
-      <Grid container spacing={1}>
-        {beneficiaryData.length>0&&beneficiaryData.map((val, key) => {
-          return <Grid item xs={6} sm={4} key={key}>
-            <SingleBeneficiaryCard name={val.name} reason={val.description} address={val.address} image={val.image}/>
+  return (
+    <div>
+      <HeaderAndFooterWrapper>
+        <Grid container>
+          <Grid item xs={10}>
+            <Typography> Beneficiary </Typography>
           </Grid>
-        })}
-      </Grid>
+          <Grid item xs={2}>
+            <FullScreenDialogCustom mainLayout={<RegisterBeneficiary />}>
+              <Button> Register </Button>
+            </FullScreenDialogCustom>
+          </Grid>
+        </Grid>
 
-    </HeaderAndFooterWrapper>
-  </div>;
+        {/* <div style={{ margin: "0px 200px" }}> */}
+        <Grid container spacing={1}>
+          {beneficiaryList.length > 0 &&
+            beneficiaryList.map((val, key) => {
+              return (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={key}>
+                  <SingleBeneficiaryCard
+                    name={val.name}
+                    reason={val.description}
+                    address={val.address}
+                    image={val.image}
+                    currentDonation={val.curren_donation}
+                    donationGoal={val.donation_goal}
+                  />
+                </Grid>
+              );
+            })}
+        </Grid>
+        {/* </div> */}
+      </HeaderAndFooterWrapper>
+    </div>
+  );
 };
 
 export default Beneficiary;

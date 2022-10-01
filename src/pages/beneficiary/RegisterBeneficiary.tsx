@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { TextField, Typography, Button } from '@mui/material'
 
-const formFields = [{ label: "Name", name: "name" }, { label: "Address", name: "address" },{ label: "Description", name: "description" },]
+const formFields = [{ label: "Name", name: "name" }, { label: "Address", name: "address" },{ label: "Description", name: "description" },{ label: "Donation Goal", name: "goal" }]
 
 export default function RegisterBeneficiary() {
 
@@ -18,7 +18,7 @@ export default function RegisterBeneficiary() {
         axios.post("http://localhost:5001/beneficiary/add",{
            ...beneficiaryObj
         }).then((response)=>{
-            console.log(response);
+            console.log(response.data.message.beneficiary._id);
         })
         console.log(beneficiaryObj);
     }

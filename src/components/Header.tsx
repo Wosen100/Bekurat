@@ -77,7 +77,7 @@ function Header() {
             <NavLink to="/Donors">Donors</NavLink>
           </li>
           <li>
-            <NavLink to="/Donation">Donation</NavLink>
+            <NavLink to="/Donation">Beneficiary</NavLink>
           </li>
 
           {user ? (

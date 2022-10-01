@@ -1,12 +1,6 @@
-import {
-  createSlice,
-  createAsyncThunk,
-  PayloadAction,
-  ActionReducerMapBuilder,
-} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "..";
-// import { NoSubstitutionTemplateLiteral } from 'typescript'
 
 export const getBeneficiaries = createAsyncThunk(
   "beneficiary/getBeneficiaries",
@@ -17,7 +11,39 @@ export const getBeneficiaries = createAsyncThunk(
   }
 );
 
-interface Beneficiary {
+export const createBeneficiary = createAsyncThunk(
+  "beneficiary/createBeneficiary",
+  async (yourData: any) => {
+    let { imageFile, beneficiary } = yourData;
+
+    let imagepath = await uploadImage(imageFile);
+    console.log(imagepath);
+    const createBeneficiaryResponse = await axios.post(
+      "http://localhost:5001/beneficiary/add",
+      { ...beneficiary, image: imagepath ? imagepath : "" }
+    );
+    return createBeneficiaryResponse.data.message.beneficiary;
+  }
+);
+
+const uploadImage = async (imageFile: any) => {
+  const uploadRes = await axios.post(
+    "http://localhost:5001/beneficiary/upload",
+    imageFile,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  if (uploadRes.data.status === 200) {
+    return uploadRes.data.filePath;
+  } else {
+    return false;
+  }
+};
+
+export interface Beneficiary {
   name: string;
   description: string;
   address: string;
@@ -28,15 +54,23 @@ interface Beneficiary {
 
 interface BeneState {
   beneficiaryList: Array<Beneficiary>;
+  createBeneLoading: String;
+  selectedBeneficiary: Beneficiary | null;
 }
 
 const initialState = {
   beneficiaryList: [],
+  createBeneLoading: "idle",
+  selectedBeneficiary: null,
 } as BeneState;
 export const BeneSlices = createSlice({
   name: "beneficiary",
   initialState,
-  reducers: {},
+  reducers: {
+    selectBeneficiary: (state, action: PayloadAction<Beneficiary>) => {
+      state.selectedBeneficiary = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder.addCase(
       getBeneficiaries.fulfilled,
@@ -44,10 +78,20 @@ export const BeneSlices = createSlice({
         state.beneficiaryList = action.payload;
       }
     );
+    builder.addCase(createBeneficiary.pending, (state, action) => {
+      state.createBeneLoading = "loading";
+    });
+    builder.addCase(
+      createBeneficiary.fulfilled,
+      (state, action: PayloadAction<Beneficiary>) => {
+        // console.log(action);
+        state.createBeneLoading = "completed";
+        state.beneficiaryList = [...state.beneficiaryList, action.payload];
+      }
+    );
   },
 });
 
-export default BeneSlices.reducer;
+export const { selectBeneficiary } = BeneSlices.actions;
 
-export const getAllBeneficiariesTest = (state: RootState) =>
-  state.bene.beneficiaryList;
+export default BeneSlices.reducer;

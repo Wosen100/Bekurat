@@ -100,7 +100,7 @@ function Header() {
             
       <MainHeaderWrapper>
         <h1>
-          Welcome to <strong>Asrat</strong>
+          Welcome to <strong>Asrat-Bekurat</strong>
         </h1>
       </MainHeaderWrapper>
     </HeaderWrapper>

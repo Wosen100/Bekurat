@@ -9,19 +9,20 @@ import Beneficiary from "./pages/Beneficiary";
 import Donor from "./pages/Donor";
 import LandingPage from "./pages/LandingPage";
 import Signout from "./pages/auth/Signout";
+import BeneficiaryDetails from "./pages/BeneficiaryDetails";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage />}>
-        </Route>
-          <Route path="/signin" element={<Login />} />
-          <Route path="/signup" element={<Register />} />
-          <Route path="/signout" element={<Signout />} />
+        <Route path="/" element={<LandingPage />}></Route>
+        <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="/signout" element={<Signout />} />
 
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/donation" element={<Beneficiary />} />
+        <Route path="/donation/details" element={<BeneficiaryDetails />} />
         <Route path="/donors" element={<Donor />} />
       </Routes>
     </BrowserRouter>

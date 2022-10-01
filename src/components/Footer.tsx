@@ -13,7 +13,7 @@ background-color:#ccc;
 function Footer(){
     return(
         <FooterWrapper>
-            @wosen 2022
+            developed by Wosen-Konjo 2022
         </FooterWrapper>
     )
 }

@@ -5,10 +5,17 @@ import SingleBeneficiaryCard from "../components/beneficiary/SingleBeneficiaryCa
 import FullScreenDialogCustom from "../components/common/FullScreenDialogCustom";
 import RegisterBeneficiary from "./beneficiary/RegisterBeneficiary";
 import { useDispatch, useSelector } from "react-redux";
-import { getBeneficiaries } from "../store/slices/beneficiarySlice";
+import {
+  Beneficiary as BeneficiaryModel,
+  getBeneficiaries,
+  selectBeneficiary,
+} from "../store/slices/beneficiarySlice";
 import { AppDispatch, RootState } from "../store";
+import { useNavigate } from "react-router-dom";
 
 const Beneficiary = () => {
+  const navigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const beneficiaryList = useSelector(
     (state: RootState) => state.bene.beneficiaryList
@@ -18,6 +25,11 @@ const Beneficiary = () => {
     dispatch(getBeneficiaries());
   }, []);
 
+  const handleSelect = (beneficiary: BeneficiaryModel) => {
+    dispatch(selectBeneficiary(beneficiary));
+    navigate("/Donation/details");
+  };
+
   return (
     <div>
       <HeaderAndFooterWrapper>
@@ -26,7 +38,12 @@ const Beneficiary = () => {
             <Typography> Beneficiary </Typography>
           </Grid>
           <Grid item xs={2}>
-            <FullScreenDialogCustom mainLayout={<RegisterBeneficiary />}>
+            <FullScreenDialogCustom
+              open={open}
+              setOpen={setOpen}
+              title="Register New Beneficiary"
+              mainLayout={<RegisterBeneficiary setOpen={setOpen} />}
+            >
               <Button> Register </Button>
             </FullScreenDialogCustom>
           </Grid>
@@ -37,7 +54,15 @@ const Beneficiary = () => {
           {beneficiaryList.length > 0 &&
             beneficiaryList.map((val, key) => {
               return (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={key}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                  key={key}
+                  onClick={() => handleSelect(val)}
+                >
                   <SingleBeneficiaryCard
                     name={val.name}
                     reason={val.description}
@@ -46,6 +71,7 @@ const Beneficiary = () => {
                     currentDonation={val.curren_donation}
                     donationGoal={val.donation_goal}
                   />
+
                 </Grid>
               );
             })}

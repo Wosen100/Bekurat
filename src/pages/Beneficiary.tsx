@@ -27,15 +27,15 @@ const Beneficiary = () => {
 
   const handleSelect = (beneficiary: BeneficiaryModel) => {
     dispatch(selectBeneficiary(beneficiary));
-    navigate("/Donation/details");
+    navigate("/beneficiaries/details");
   };
 
   return (
-    <div>
-      <HeaderAndFooterWrapper>
+    <HeaderAndFooterWrapper>
+        <div style={{paddingTop:"60px"}}>
         <Grid container>
           <Grid item xs={10}>
-            <Typography> Beneficiary </Typography>
+            <Typography> Beneficiaries </Typography>
           </Grid>
           <Grid item xs={2}>
             <FullScreenDialogCustom
@@ -44,7 +44,7 @@ const Beneficiary = () => {
               title="Register New Beneficiary"
               mainLayout={<RegisterBeneficiary setOpen={setOpen} />}
             >
-              <Button> Register </Button>
+              <Button> <strong> Start Your Fundraising here  </strong> </Button>
             </FullScreenDialogCustom>
           </Grid>
         </Grid>
@@ -77,8 +77,8 @@ const Beneficiary = () => {
             })}
         </Grid>
         {/* </div> */}
-      </HeaderAndFooterWrapper>
     </div>
+      </HeaderAndFooterWrapper>
   );
 };
 

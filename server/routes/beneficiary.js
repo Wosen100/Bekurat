@@ -1,4 +1,3 @@
-const { GavelOutlined } = require("@mui/icons-material");
 const express = require("express");
 const beneficiaryRoute = express.Router();
 
@@ -37,6 +36,17 @@ beneficiaryRoute.route("/get").get(function (req, res) {
   Beneficiary.find().then((response) => {
     res.send({
       beneficiaries: response,
+    });
+  });
+});
+
+beneficiaryRoute.route("/donate").put(function (req, res) {
+  let { _id, donation } = req.body;
+
+  Beneficiary.findById(_id, function (err, beneficiary) {
+    beneficiary.curren_donation = beneficiary.curren_donation + donation;
+    beneficiary.save().then((newBene) => {
+      res.send(newBene);
     });
   });
 });

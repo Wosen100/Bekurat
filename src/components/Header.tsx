@@ -45,12 +45,10 @@ background-color:gray;
     }
 `;
 
-const MainHeaderWrapper = styles.div`
-padding-top: 100px;
-h1{
-    text-align: center;
-}
-`;
+
+
+const navItems = [{ text: "Home", link: "/" }, { text: "Beneficiary", link: "/beneficiaries" }];
+
 function Header() {
   const [user, setUser] = useState(false);
 
@@ -67,19 +65,11 @@ function Header() {
     <HeaderWrapper>
       <NavWrapper>
         <ul>
-          <li>
-            <NavLink to="/dashboard">Dashboard</NavLink>
-          </li>
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/Donors">Donors</NavLink>
-          </li>
-          <li>
-            <NavLink to="/Donation">Beneficiary</NavLink>
-          </li>
-
+          {navItems.map((val, key) => {
+            return <li key={key}>
+              <NavLink to={val.link}>{val.text}</NavLink>
+            </li>
+          })}
           {user ? (
             <li>
               <NavLink to="/signout">Sign Out</NavLink>
@@ -96,13 +86,6 @@ function Header() {
           )}
         </ul>
       </NavWrapper>
-
-            
-      <MainHeaderWrapper>
-        <h1>
-          Welcome to <strong>Asrat-Bekurat</strong>
-        </h1>
-      </MainHeaderWrapper>
     </HeaderWrapper>
   );
 }

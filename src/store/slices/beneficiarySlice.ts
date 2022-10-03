@@ -17,12 +17,25 @@ export const createBeneficiary = createAsyncThunk(
     let { imageFile, beneficiary } = yourData;
 
     let imagepath = await uploadImage(imageFile);
-    console.log(imagepath);
+
     const createBeneficiaryResponse = await axios.post(
       "http://localhost:5001/beneficiary/add",
       { ...beneficiary, image: imagepath ? imagepath : "" }
     );
     return createBeneficiaryResponse.data.message.beneficiary;
+  }
+);
+
+const updateWithDonate = createAsyncThunk(
+  "beneficiary/donate",
+  async (params: any) => {
+    let { _id, donation } = params;
+    const beneUpdateRes = await axios.put(
+      "http://localhost:5001/beneficiary/donate",
+      { _id, donation }
+    );
+    console.log(beneUpdateRes.data);
+    return beneUpdateRes.data;
   }
 );
 
@@ -44,6 +57,7 @@ const uploadImage = async (imageFile: any) => {
 };
 
 export interface Beneficiary {
+  _id: string;
   name: string;
   description: string;
   address: string;

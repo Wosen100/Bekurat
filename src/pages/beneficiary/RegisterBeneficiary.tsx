@@ -62,7 +62,7 @@ export default function RegisterBeneficiary({
           </Typography>
           <br />
           <Typography>
-            You may find millions of donors who love that keeps you alive.
+            Start your Fundraising here
           </Typography>
           <div style={{ paddingTop: "20px" }}>
             {formFields.map((val, key) =>

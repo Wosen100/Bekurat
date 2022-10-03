@@ -20,10 +20,9 @@ export default function App() {
         <Route path="/signup" element={<Register />} />
         <Route path="/signout" element={<Signout />} />
 
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/donation" element={<Beneficiary />} />
-        <Route path="/donation/details" element={<BeneficiaryDetails />} />
-        <Route path="/donors" element={<Donor />} />
+        <Route path="/beneficiaries" element={<Beneficiary />} />
+        <Route path="/beneficiaries/details" element={<BeneficiaryDetails />} />
+        
       </Routes>
     </BrowserRouter>
   );

@@ -19,6 +19,8 @@ serverApp.use(express.static("uploads"));
 dotenv.config({ path: "./config/config.env" });
 const connectDB = require("./config/db.js");
 const uploadRouter = require("./routes/uploadFile");
+const donorRoute = require("./routes/donor");
+const donationRoute = require("./routes/donation");
 
 // load env variables
 
@@ -29,6 +31,8 @@ connectDB();
 
 serverApp.use("/beneficiary", beneficiaryRoute);
 serverApp.use("/beneficiary", uploadRouter);
+serverApp.use("/donor", donorRoute);
+serverApp.use("/donation", donationRoute);
 serverApp.get("/", function (request, response) {
   response.send("hi, I am server");
 });

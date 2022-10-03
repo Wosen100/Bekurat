@@ -4,14 +4,23 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const bodyParser = require("body-parser");
 
 const User = require("./models/User");
 
+const beneficiaryRoute = require("./routes/beneficiary");
+
 const serverApp = express();
 serverApp.use(cors());
+serverApp.use(bodyParser.urlencoded({ extended: true }));
+
+serverApp.use(express.static("uploads"));
 
 dotenv.config({ path: "./config/config.env" });
 const connectDB = require("./config/db.js");
+const uploadRouter = require("./routes/uploadFile");
+const donorRoute = require("./routes/donor");
+const donationRoute = require("./routes/donation");
 
 // load env variables
 
@@ -20,6 +29,10 @@ serverApp.use(express.json());
 // connect database
 connectDB();
 
+serverApp.use("/beneficiary", beneficiaryRoute);
+serverApp.use("/beneficiary", uploadRouter);
+serverApp.use("/donor", donorRoute);
+serverApp.use("/donation", donationRoute);
 serverApp.get("/", function (request, response) {
   response.send("hi, I am server");
 });
@@ -42,10 +55,7 @@ serverApp.post("/api/auth/login", async (req, res) => {
         message: "Invalid password",
       });
     } else {
-      const token = jwt.sign(
-        { _id: user._id, email: user.email },
-        "secret123"
-      );
+      const token = jwt.sign({ _id: user._id, email: user.email }, "secret123");
       return res.status(200).json({
         success: true,
         message: "Login successful",
@@ -60,9 +70,7 @@ serverApp.post("/api/auth/register", async (req, res) => {
   // hash password using bcrypt
 
   try {
-    
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    
 
     const user = await User.findOne({ email: req.body.email });
     if (user) {

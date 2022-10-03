@@ -4,17 +4,16 @@ import styles from 'styled-components';
 
 const FooterWrapper = styles.footer`
 
-position:absolute;
+position:fixed;
 bottom:0;
 width:100%;
-padding:10px;
 background-color:#ccc;
 `;
 
 function Footer(){
     return(
         <FooterWrapper>
-            This is footer
+            developed by Wosen-Konjo 2022
         </FooterWrapper>
     )
 }

@@ -2,6 +2,7 @@ import { Button, Card, Grid, Typography } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
+import { updateWithDonate } from "../../store/slices/beneficiarySlice";
 import { createDonation } from "../../store/slices/donationSlice";
 import CreditCardComponent from "./donateForm/CreditCardComponent";
 import DonateValueComponent from "./donateForm/DonateValueComponent";
@@ -15,9 +16,6 @@ export default function DonateForm() {
   const dispatch = useDispatch<AppDispatch>();
   const donor = useSelector((state: RootState) => state.donor.newDonor);
 
-  console.log(selectedBeneficiary?._id);
-  console.log(donor?._id);
-
   const { name, image } = selectedBeneficiary!;
   const [isContinue, setIsConinue] = React.useState(false);
   const [isContinue2, setIsConinue2] = React.useState(false);
@@ -29,14 +27,15 @@ export default function DonateForm() {
   };
 
   const handleDonate = () => {
-    console.log(donor?._id);
-    console.log(selectedBeneficiary?._id);
     dispatch(
       createDonation({
         beneficiary: selectedBeneficiary?._id,
         donor: donor?._id,
         donationAmount: donateValue,
       })
+    );
+    dispatch(
+      updateWithDonate({ _id: selectedBeneficiary?._id, donation: donateValue })
     );
   };
 
@@ -92,7 +91,9 @@ export default function DonateForm() {
             <Typography style={{ fontSize: "20px" }}>
               <b> Your donation</b>
             </Typography>
-            <Typography> {donateValue}</Typography>
+            <Typography style={{ fontSize: "20px", marginTop: "10px" }}>
+              £{donateValue}.00
+            </Typography>
           </Card>
         </Grid>
       </Grid>

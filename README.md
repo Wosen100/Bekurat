@@ -1,4 +1,46 @@
-# Getting Started with Create React App
+CapStone Fullstack Application
+Supporting your churches can't get easier than this, donate to your favorate angel!
+
+Table of Contents
+
+About The Project
+This app build with the existing knowledge of the React basics, and give you further practice working with codebase linting, component testing, Redux Toolkit, and TypeScript. 
+
+The user are two kinds one is the donners and the other will be the beneficiaries.  Beneficiaries as defiend this app are people who be able to add a post, images, edit and update their description and request for funding.  On the other hand donners are people who reads the post and donate monetry support.
+
+
+This app used Redux Toolkit and state slices to manage any state data needed across multiple components. In the case where data is created and used only within one component (or possibly one and a few of its direct children), consider using useState() or useReducer() and traditional prop drilling. Most apps will use a combination of "local" state management (useState() and useReducer()) and "global" state management (Redux or Context API).
+
+Apply the TypeScript static typing system. try to use TypeScript for the majority of React components! installed typescript, add support for TypeScript linting, and use either .ts or .tsx extension for the files to apply TypeScript type-checking on.
+
+Use the BLANK_README.md to get started.
+
+
+
+Built With
+A few of the frameworks/libraries that were used to build the project are:
+
+[![React][React.js]][React-url]
+[![Express][Express.js]][Express-url]
+Node.js
+React Redux
+Axios
+React Router
+JWT Authentication
+Bcrypt
+Mongoose
+MongoDB
+EsLint and AirBnb
+json server
+
+
+
+
+
+
+
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -70,7 +70,7 @@ const Register = () => {
       <h3>Sign Up</h3>
 
       {error.error && <label style={{ color: "red" }}>{error.message}</label>}
-      {user && <Navigate to="/dashboard" replace={true} />}
+      {user && <Navigate to="/beneficiaries" replace={true} />}
       <div className="form-container">
         <form onSubmit={submitHandler}>
           <input

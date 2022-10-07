@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography, Button, Card } from "@mui/material";
+import { Grid, Typography, Button } from "@mui/material";
 import HeaderAndFooterWrapper from "../components/HeaderAndFooterWrapper";
 import SingleBeneficiaryCard from "../components/beneficiary/SingleBeneficiaryCard";
 import FullScreenDialogCustom from "../components/common/FullScreenDialogCustom";
@@ -7,11 +7,13 @@ import RegisterBeneficiary from "./beneficiary/RegisterBeneficiary";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Beneficiary as BeneficiaryModel,
+  clearBeneLoading,
   getBeneficiaries,
   selectBeneficiary,
 } from "../store/slices/beneficiarySlice";
 import { AppDispatch, RootState } from "../store";
 import { useNavigate } from "react-router-dom";
+import { clearDonationLoadingStatus } from "../store/slices/donationSlice";
 
 const Beneficiary = () => {
   const navigate = useNavigate();
@@ -21,30 +23,37 @@ const Beneficiary = () => {
     (state: RootState) => state.bene.beneficiaryList
   );
 
+  const handleOpen = (openValue: boolean) => {
+    setOpen(openValue);
+    dispatch(clearBeneLoading({}));
+  };
+
   React.useEffect(() => {
     dispatch(getBeneficiaries());
   }, []);
 
   const handleSelect = (beneficiary: BeneficiaryModel) => {
     dispatch(selectBeneficiary(beneficiary));
+    dispatch(clearDonationLoadingStatus({}));
     navigate("/beneficiaries/details");
   };
 
   return (
-    <HeaderAndFooterWrapper>
-        <div style={{paddingTop:"60px"}}>
-        <Grid container>
+    <div>
+      <HeaderAndFooterWrapper>
+        <Grid container sx={{pt:1}}>
           <Grid item xs={10}>
-            <Typography> Beneficiaries </Typography>
+            <Typography> Beneficiary </Typography>
           </Grid>
           <Grid item xs={2}>
             <FullScreenDialogCustom
+              handleClick={()=>{}}
               open={open}
-              setOpen={setOpen}
+              setOpen={handleOpen}
               title="Register New Beneficiary"
               mainLayout={<RegisterBeneficiary setOpen={setOpen} />}
             >
-              <Button> <strong> Start Your Fundraising here  </strong> </Button>
+              <Button style={{backgroundColor:"green", color:'white'}}> Register </Button>
             </FullScreenDialogCustom>
           </Grid>
         </Grid>
@@ -71,14 +80,13 @@ const Beneficiary = () => {
                     currentDonation={val.curren_donation}
                     donationGoal={val.donation_goal}
                   />
-
                 </Grid>
               );
             })}
         </Grid>
         {/* </div> */}
-    </div>
       </HeaderAndFooterWrapper>
+    </div>
   );
 };
 

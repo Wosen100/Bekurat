@@ -26,7 +26,7 @@ export const createBeneficiary = createAsyncThunk(
   }
 );
 
-const updateWithDonate = createAsyncThunk(
+export const updateWithDonate = createAsyncThunk(
   "beneficiary/donate",
   async (params: any) => {
     let { _id, donation } = params;
@@ -70,12 +70,14 @@ interface BeneState {
   beneficiaryList: Array<Beneficiary>;
   createBeneLoading: String;
   selectedBeneficiary: Beneficiary | null;
+  updateBeneLoading: String;
 }
 
 const initialState = {
   beneficiaryList: [],
   createBeneLoading: "idle",
   selectedBeneficiary: null,
+  updateBeneLoading: "idle",
 } as BeneState;
 export const BeneSlices = createSlice({
   name: "beneficiary",
@@ -83,6 +85,9 @@ export const BeneSlices = createSlice({
   reducers: {
     selectBeneficiary: (state, action: PayloadAction<Beneficiary>) => {
       state.selectedBeneficiary = action.payload;
+    },
+    clearBeneLoading: (state, action) => {
+      state.createBeneLoading = "idle";
     },
   },
   extraReducers(builder) {
@@ -98,14 +103,19 @@ export const BeneSlices = createSlice({
     builder.addCase(
       createBeneficiary.fulfilled,
       (state, action: PayloadAction<Beneficiary>) => {
-        // console.log(action);
         state.createBeneLoading = "completed";
         state.beneficiaryList = [...state.beneficiaryList, action.payload];
       }
     );
+    builder.addCase(updateWithDonate.pending, (state, action) => {
+      state.updateBeneLoading = "loading";
+    });
+    builder.addCase(updateWithDonate.fulfilled, (state, action) => {
+      state.updateBeneLoading = "completed";
+    });
   },
 });
 
-export const { selectBeneficiary } = BeneSlices.actions;
+export const { selectBeneficiary, clearBeneLoading } = BeneSlices.actions;
 
 export default BeneSlices.reducer;

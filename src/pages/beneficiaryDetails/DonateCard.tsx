@@ -3,7 +3,11 @@ import LinearProgressBar from "../../components/common/LinearProgressBar";
 import { RWebShare } from "react-web-share";
 import FullScreenDialogCustom from "../../components/common/FullScreenDialogCustom";
 import React from "react";
-import DonateForm from "./DonateForm";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
+import { clearCreateDonorLoading } from "../../store/slices/donorSlice";
+import DonationPage from "./DonationPage";
+import SocialShareButton from "../../components/common/SocialShareIcons";
 
 interface DonateCardProps {
   currentDonation: number;
@@ -18,6 +22,8 @@ export default function DonateCard({
 }: DonateCardProps) {
   const [open, setOpen] = React.useState(false);
 
+  const dispatch = useDispatch<AppDispatch>();
+
   return (
     <Card sx={{ ml: 5, p: 2 }}>
       <Typography
@@ -27,7 +33,7 @@ export default function DonateCard({
           fontSize: "18px",
         }}
       >
-        £{currentDonation}
+        ${currentDonation.toLocaleString()}
         <span
           style={{
             color: "grey",
@@ -36,40 +42,23 @@ export default function DonateCard({
           }}
         >
           {" "}
-          raised of £{donationGoal} goal
+          raised of ${donationGoal.toLocaleString()} goal
         </span>
       </Typography>
       <br />
       <LinearProgressBar value={(currentDonation / donationGoal) * 100} />
       <br />
-      <RWebShare
-        data={{
-          text: "",
-          url: "http://localhost:3000/beneficiaries/",
-          title: title,
-        }}
-        onClick={() => console.log("shared successfully!")}
-      >
-        <Button
-          variant="contained"
-          fullWidth
-          style={{
-            height: "50px",
-            color: "black",
-            fontWeight: "bold",
-            backgroundColor: "lightgreen",
-          }}
-        >
-          Share 🔗
-        </Button>
-      </RWebShare>
+      <SocialShareButton url="http://localhost:3000/" />
       <br />
       <br />
       <FullScreenDialogCustom
+        handleClick={() => {
+          dispatch(clearCreateDonorLoading({}));
+        }}
         title="Donate"
         open={open}
         setOpen={setOpen}
-        mainLayout={<DonateForm />}
+        mainLayout={<DonationPage />}
       >
         <Button
           variant="contained"

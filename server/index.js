@@ -15,6 +15,7 @@ serverApp.use(cors());
 serverApp.use(bodyParser.urlencoded({ extended: true }));
 
 serverApp.use(express.static("uploads"));
+serverApp.use(express.static("public"));
 
 dotenv.config({ path: "./config/config.env" });
 const connectDB = require("./config/db.js");
@@ -74,6 +75,7 @@ serverApp.post("/api/auth/register", async (req, res) => {
 
     const user = await User.findOne({ email: req.body.email });
     if (user) {
+      console.log(user)
       return res.status(400).json({
         success: false,
         message: "User already exists",
@@ -84,6 +86,7 @@ serverApp.post("/api/auth/register", async (req, res) => {
         lastName: req.body.lastName,
         email: req.body.email,
         password: hashedPassword,
+        username:req.body.username,
       });
 
       if (newUser) {

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 const HeaderWrapper = styles.header`
 width:100%;
-position: relative;
+position: sticky;
 `;
 
 const NavWrapper = styles.nav`
@@ -15,7 +15,7 @@ const NavWrapper = styles.nav`
 width:100%;
 position: fixed;
 margin-bottom: 80px;
-background-color:gray;
+background-color:lightgreen;
     ul{
         list-style: none;
     }
@@ -31,7 +31,7 @@ background-color:gray;
         font-size: 16px;
     }
     a:hover, button:hover{
-        background-color: rgb(77, 63, 63);
+        background-color: green;
         color: white;
     }
     button {
@@ -76,12 +76,12 @@ function Header() {
             </li>
           ) : (
             <>
-              <li>
+              {/* <li>
                 <NavLink to="/signin">Sign In</NavLink>
               </li>
               <li>
                 <NavLink to="/signup">Sign Up</NavLink>
-              </li>
+              </li> */}
             </>
           )}
         </ul>

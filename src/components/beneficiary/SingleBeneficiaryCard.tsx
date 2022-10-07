@@ -41,8 +41,11 @@ export default function SingleBeneficiaryCard({
         <Typography
           style={{ color: "green", fontWeight: "700", marginTop: "10px" }}
         >
-          £{currentDonation}
-          <span style={{ color: "black" }}> raised of £{donationGoal}</span>
+          £{currentDonation.toLocaleString()}
+          <span style={{ color: "black" }}>
+            {" "}
+            raised of £{donationGoal.toLocaleString()}
+          </span>
         </Typography>
       </div>
     </Card>

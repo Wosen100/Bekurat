@@ -16,7 +16,7 @@ export default function BeneficiaryDetails() {
 
   return (
     <HeaderAndFooterWrapper>
-      <div style={{ padding: "0 100px" }}>
+      <div style={{ padding: "60px 100px" }}>
         <Grid container>
           <Grid item xs={12}>
             <Typography style={{ fontWeight: "bold" }} variant={"h4"}>

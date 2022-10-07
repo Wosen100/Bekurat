@@ -92,7 +92,7 @@ export default function DonateForm() {
               <b> Your donation</b>
             </Typography>
             <Typography style={{ fontSize: "20px", marginTop: "10px" }}>
-              £{donateValue}.00
+              ${donateValue}.00
             </Typography>
           </Card>
         </Grid>

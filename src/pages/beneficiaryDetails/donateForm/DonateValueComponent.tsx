@@ -27,11 +27,11 @@ export default function DonateValueComponent({
   return (
     <div>
       <Grid item container>
-        <Grid item xs={3}>
+        <Grid item xs={12} sm={4}>
           <img src={image} style={{ width: "100%", borderRadius: "2px" }} />
         </Grid>
         <Grid item xs={1}></Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <Typography>
             You're supporing <b>{name}</b>{" "}
           </Typography>
@@ -62,7 +62,7 @@ export default function DonateValueComponent({
                       <Typography
                         style={{ fontWeight: "bold", color: "black" }}
                       >
-                        £
+                        $
                       </Typography>
                     </Grid>
                     <Grid item>
@@ -70,7 +70,7 @@ export default function DonateValueComponent({
                         style={{ fontWeight: "bold", color: "black" }}
                       >
                         {" "}
-                        GBP
+                        USD
                       </Typography>
                     </Grid>
                   </Grid>

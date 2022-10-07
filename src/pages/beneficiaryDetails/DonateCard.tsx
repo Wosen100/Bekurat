@@ -33,7 +33,7 @@ export default function DonateCard({
           fontSize: "18px",
         }}
       >
-        £{currentDonation.toLocaleString()}
+        ${currentDonation.toLocaleString()}
         <span
           style={{
             color: "grey",
@@ -42,7 +42,7 @@ export default function DonateCard({
           }}
         >
           {" "}
-          raised of £{donationGoal.toLocaleString()} goal
+          raised of ${donationGoal.toLocaleString()} goal
         </span>
       </Typography>
       <br />

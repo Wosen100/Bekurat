@@ -85,7 +85,7 @@ const Login = () => {
       <h3>Sign In</h3>
 
       {error.error && <label style={{ color: "red" }}>{error.message}</label>}
-      {user && <Navigate to="/dashboard" replace={true} />}
+      {user && <Navigate to="/beneficiaries" replace={true} />}
         <form onSubmit={submitHandler}>
           <input
             type="email"

@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
 import { clearCreateDonorLoading } from "../../store/slices/donorSlice";
 import DonationPage from "./DonationPage";
+import SocialShareButton from "../../components/common/SocialShareIcons";
 
 interface DonateCardProps {
   currentDonation: number;
@@ -32,7 +33,7 @@ export default function DonateCard({
           fontSize: "18px",
         }}
       >
-        £{currentDonation}
+        £{currentDonation.toLocaleString()}
         <span
           style={{
             color: "grey",
@@ -41,33 +42,13 @@ export default function DonateCard({
           }}
         >
           {" "}
-          raised of £{donationGoal} goal
+          raised of £{donationGoal.toLocaleString()} goal
         </span>
       </Typography>
       <br />
       <LinearProgressBar value={(currentDonation / donationGoal) * 100} />
       <br />
-      <RWebShare
-        data={{
-          text: "",
-          url: "http://localhost:3000/beneficiaries/",
-          title: title,
-        }}
-        onClick={() => console.log("shared successfully!")}
-      >
-        <Button
-          variant="contained"
-          fullWidth
-          style={{
-            height: "50px",
-            color: "black",
-            fontWeight: "bold",
-            backgroundColor: "lightgreen",
-          }}
-        >
-          Share 🔗
-        </Button>
-      </RWebShare>
+      <SocialShareButton url="http://localhost:3000/" />
       <br />
       <br />
       <FullScreenDialogCustom

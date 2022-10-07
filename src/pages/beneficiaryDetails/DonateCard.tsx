@@ -3,7 +3,10 @@ import LinearProgressBar from "../../components/common/LinearProgressBar";
 import { RWebShare } from "react-web-share";
 import FullScreenDialogCustom from "../../components/common/FullScreenDialogCustom";
 import React from "react";
-import DonateForm from "./DonateForm";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
+import { clearCreateDonorLoading } from "../../store/slices/donorSlice";
+import DonationPage from "./DonationPage";
 
 interface DonateCardProps {
   currentDonation: number;
@@ -17,6 +20,8 @@ export default function DonateCard({
   title,
 }: DonateCardProps) {
   const [open, setOpen] = React.useState(false);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <Card sx={{ ml: 5, p: 2 }}>
@@ -66,10 +71,13 @@ export default function DonateCard({
       <br />
       <br />
       <FullScreenDialogCustom
+        handleClick={() => {
+          dispatch(clearCreateDonorLoading({}));
+        }}
         title="Donate"
         open={open}
         setOpen={setOpen}
-        mainLayout={<DonateForm />}
+        mainLayout={<DonationPage />}
       >
         <Button
           variant="contained"

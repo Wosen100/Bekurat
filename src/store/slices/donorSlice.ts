@@ -11,10 +11,12 @@ interface Donor {
 
 interface DonorState {
   newDonor: Donor | null;
+  createDonorLoading: string;
 }
 
 const initialState: DonorState = {
   newDonor: null,
+  createDonorLoading: "idle",
 };
 
 export const createNewDonor = createAsyncThunk(
@@ -29,15 +31,25 @@ export const createNewDonor = createAsyncThunk(
 export const DonorSlice = createSlice({
   name: "donor",
   initialState,
-  reducers: {},
+  reducers: {
+    clearCreateDonorLoading: (state, action) => {
+      state.createDonorLoading = "idle";
+    },
+  },
   extraReducers(builder) {
     builder.addCase(
       createNewDonor.fulfilled,
       (state, action: PayloadAction<Donor>) => {
         state.newDonor = action.payload;
+        state.createDonorLoading = "completed";
       }
     );
+    builder.addCase(createNewDonor.pending, (state, action) => {
+      state.createDonorLoading = "loading";
+    });
   },
 });
+
+export const { clearCreateDonorLoading } = DonorSlice.actions;
 
 export default DonorSlice.reducer;

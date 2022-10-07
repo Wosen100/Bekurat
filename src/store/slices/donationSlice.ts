@@ -9,10 +9,12 @@ interface Donation {
 
 interface DonationState {
   newDonation: Donation | null;
+  createDonationLoading: string;
 }
 
 const initialState: DonationState = {
   newDonation: null,
+  createDonationLoading: "idle",
 };
 
 export const createDonation = createAsyncThunk(
@@ -29,13 +31,25 @@ export const createDonation = createAsyncThunk(
 export const DonationSlice = createSlice({
   name: "donation",
   initialState,
-  reducers: {},
+  reducers: {
+    clearDonationLoadingStatus: (state, action) => {
+      state.createDonationLoading = "idle";
+    },
+  },
   extraReducers(builder) {
     builder.addCase(
       createDonation.fulfilled,
       (state, action: PayloadAction<Donation>) => {
         state.newDonation = action.payload;
+        state.createDonationLoading = "completed";
       }
     );
+    builder.addCase(createDonation.pending, (state, action) => {
+      state.createDonationLoading = "loading";
+    });
   },
 });
+
+export const { clearDonationLoadingStatus } = DonationSlice.actions;
+
+export default DonationSlice.reducer;

@@ -4,9 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./pages/auth/Register";
 
 import Login from "./pages/auth/Login";
-import Dashboard from "./pages/Dashboard";
+// import Dashboard from "./pages/Dashboard";
 import Beneficiary from "./pages/Beneficiary";
-import Donor from "./pages/Donor";
+// import Donor from "./pages/Donor";
 import LandingPage from "./pages/LandingPage";
 import Signout from "./pages/auth/Signout";
 import BeneficiaryDetails from "./pages/BeneficiaryDetails";

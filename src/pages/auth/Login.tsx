@@ -97,7 +97,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <button>Sign In <br /> ወደ አካውንትዎ በዚህ ይግቡ </button>
+          <button style={{backgroundColor:"green", color:'white'}}>Sign In <br /> ወደ አካውንትዎ በዚህ ይግቡ </button>
         </form>
       </FormWrapper>
     </div>

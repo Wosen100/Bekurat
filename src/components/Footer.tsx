@@ -7,7 +7,10 @@ const FooterWrapper = styles.footer`
 position:fixed;
 bottom:0;
 width:100%;
-background-color:#ccc;
+background-color:lightgreen;
+padding:5px;
+display:flex;
+justify-content:center;
 `;
 
 function Footer(){

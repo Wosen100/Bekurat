@@ -41,25 +41,25 @@ const Beneficiary = () => {
   return (
     <div>
       <HeaderAndFooterWrapper>
-        <Grid container sx={{pt:1}}>
+        <Grid container>
           <Grid item xs={10}>
             <Typography> Beneficiary </Typography>
           </Grid>
           <Grid item xs={2}>
             <FullScreenDialogCustom
-              handleClick={()=>{}}
+              handleClick={() => {}}
               open={open}
               setOpen={handleOpen}
               title="Register New Beneficiary"
               mainLayout={<RegisterBeneficiary setOpen={setOpen} />}
             >
-              <Button style={{backgroundColor:"green", color:'white'}}> Register </Button>
+              <Button> Register </Button>
             </FullScreenDialogCustom>
           </Grid>
         </Grid>
 
         {/* <div style={{ margin: "0px 200px" }}> */}
-        <Grid container spacing={1}>
+        <Grid container spacing={2} justifyContent="center">
           {beneficiaryList.length > 0 &&
             beneficiaryList.map((val, key) => {
               return (
@@ -72,14 +72,28 @@ const Beneficiary = () => {
                   key={key}
                   onClick={() => handleSelect(val)}
                 >
-                  <SingleBeneficiaryCard
-                    name={val.name}
-                    reason={val.description}
-                    address={val.address}
-                    image={val.image}
-                    currentDonation={val.curren_donation}
-                    donationGoal={val.donation_goal}
-                  />
+                  <div
+                    style={{
+                      boxShadow: "rgb(0 1 10 / 5%) 0px 5px 10px",
+                      background: "#FFF",
+                      borderRadius: "1rem",
+                      border: "2px solid green",
+                      marginBottom: "40px",
+                      height: "100%",
+                      margin: "10px",
+                      // position: "relative",
+                      // display: "flex",
+                    }}
+                  >
+                    <SingleBeneficiaryCard
+                      name={val.name}
+                      reason={val.description}
+                      address={val.address}
+                      image={val.image}
+                      currentDonation={val.curren_donation}
+                      donationGoal={val.donation_goal}
+                    />
+                  </div>
                 </Grid>
               );
             })}

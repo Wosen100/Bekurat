@@ -82,7 +82,7 @@ const Login = () => {
   return (
     <div>
       <FormWrapper className="form-container">
-      <h3>Sign In</h3>
+      
 
       {error.error && <label style={{ color: "red" }}>{error.message}</label>}
       {user && <Navigate to="/beneficiaries" replace={true} />}
@@ -97,7 +97,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <button>Sign In</button>
+          <button style={{backgroundColor:"green", color:'white'}}>Sign In <br /> ወደ አካውንትዎ በዚህ ይግቡ </button>
         </form>
       </FormWrapper>
     </div>

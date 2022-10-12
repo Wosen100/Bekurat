@@ -53,13 +53,13 @@ const Beneficiary = () => {
               title="Register New Beneficiary"
               mainLayout={<RegisterBeneficiary setOpen={setOpen} />}
             >
-              <Button> Register </Button>
+                <Button style={{backgroundColor:"green", color:'white'}}> Register </Button>
             </FullScreenDialogCustom>
           </Grid>
         </Grid>
 
-        {/* <div style={{ margin: "0px 200px" }}> */}
-        <Grid container spacing={2} justifyContent="center">
+   
+        <Grid container spacing={2} justifyContent="center" style={{marginTop:'20px'}}>
           {beneficiaryList.length > 0 &&
             beneficiaryList.map((val, key) => {
               return (
@@ -98,7 +98,7 @@ const Beneficiary = () => {
               );
             })}
         </Grid>
-        {/* </div> */}
+    
       </HeaderAndFooterWrapper>
     </div>
   );

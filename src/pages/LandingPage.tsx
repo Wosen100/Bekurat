@@ -18,13 +18,14 @@ const LandingPage = () => {
             <HeaderAndFooterWrapper>
                 <MainHeaderWrapper>
                     <h1>
-                        Welcome to <strong>Asrat-Bekurat</strong>
+                        Welcome to <strong>Asrat-Bekurat</strong> <br />
+                        <strong> አስራት-በኩራት  </strong>
                     </h1>
                 </MainHeaderWrapper>
                 <Grid container justifyContent={"center"} flexDirection="column" alignItems={"center"}>
                     <Login />
                     <br />
-                    <span> Don't have and account? <Link to="/signup"> Sign Up </Link></span>
+                    <span> Don't have and account? <Link to="/signup"> Sign Up <br /> አካውንት ከሌለዎት፤ እዚህ ጋር ተጭነው አካውንት ይፍጠሩ:: </Link></span>
                 </Grid>
             </HeaderAndFooterWrapper>
 

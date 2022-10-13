@@ -54,6 +54,7 @@ export default function CreditCardComponent() {
         >
           <label>Name on card</label>
           <input
+            data-testid="nameonthcard"
             name="name"
             onChange={handleChange}
             onFocus={handleFocus}
@@ -70,6 +71,7 @@ export default function CreditCardComponent() {
         >
           <label>Card Number</label>
           <input
+            data-testid="cardnumber"
             name="number"
             onChange={handleChange}
             onFocus={handleFocus}
@@ -86,6 +88,7 @@ export default function CreditCardComponent() {
         >
           <label>Expiration</label>
           <input
+            data-testid="expiration"
             name="expiration"
             placeholder="MM/YY"
             onChange={handleChange}
@@ -104,6 +107,7 @@ export default function CreditCardComponent() {
         >
           <label>CVC</label>
           <input
+            data-testid="cvc"
             name="cvc"
             onChange={handleChange}
             onFocus={handleFocus}

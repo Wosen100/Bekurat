@@ -27,6 +27,7 @@ export default function DonateCard({
   return (
     <Card sx={{ ml: 5, p: 2 }}>
       <Typography
+        data-testid="donation_value"
         style={{
           fontWeight: "700",
           marginTop: "10px",

@@ -68,6 +68,7 @@ export default function BeneficiaryRegistrationForm({
               val.type === "longText" ? (
                 <div key={key} style={{ paddingBottom: "5px" }}>
                   <TextField
+                    id={val.name}
                     multiline
                     rows={4}
                     fullWidth

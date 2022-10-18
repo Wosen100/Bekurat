@@ -1,10 +1,34 @@
-import { Card, Grid, Typography } from "@mui/material";
-import React from "react";
+import styles from "styled-components";
+import { Grid, Typography } from "@mui/material";
+import bgImage from "../images/candel.jpg";
 import { useSelector } from "react-redux";
-import LinearProgressBar from "../components/common/LinearProgressBar";
 import HeaderAndFooterWrapper from "../components/HeaderAndFooterWrapper";
 import { RootState } from "../store";
 import DonateCard from "./beneficiaryDetails/DonateCard";
+
+const MainBgDiv = styles.div`
+background-image:url(${bgImage});
+width:100vw;
+height:100vh;
+position:fixed;
+background-size:cover;
+background-repeat:no-repeat;
+`;
+
+const MainInnerDiv = styles.div`
+  position:absolute;
+  width:100vw;
+  overflow:scroll;
+  height:100%;
+  
+`;
+
+const DescriptionDiv = styles.div`
+background-color: #d58855;
+color: white;
+margin-top: 30px;
+padding: 20px;
+`;
 
 export default function BeneficiaryDetails() {
   const selectedBeneficiary = useSelector(
@@ -15,32 +39,40 @@ export default function BeneficiaryDetails() {
     selectedBeneficiary!;
 
   return (
-    <HeaderAndFooterWrapper>
-      <div style={{ padding: "60px 100px" }}>
-        <Grid container>
-          <Grid item xs={12}>
-            <Typography style={{ fontWeight: "bold" }} variant={"h4"}>
-              {name}
-            </Typography>
-          </Grid>
+    <MainBgDiv>
+      <MainInnerDiv>
+        <HeaderAndFooterWrapper>
+          <div style={{ padding: "60px 100px" }}>
+            <Grid container>
+              <Grid item xs={12}>
+                <Typography
+                  style={{ fontWeight: "bold", color: "white" }}
+                  variant={"h4"}
+                >
+                  {name}
+                </Typography>
+              </Grid>
 
-          <Grid item xs={12} sm={6}>
-            <br />
-            <img src={image} style={{ width: "100%" }} />
-            <br />
-            <br />
-            <Typography>{description}</Typography>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <br />
-            <DonateCard
-              currentDonation={curren_donation}
-              donationGoal={donation_goal}
-              title={name}
-            />
-          </Grid>
-        </Grid>
-      </div>
-    </HeaderAndFooterWrapper>
+              <Grid item xs={12} sm={6}>
+                <br />
+                <img src={image} style={{ width: "100%" }} alt={name}/>
+
+                <DescriptionDiv>
+                  <Typography>{description}</Typography>
+                </DescriptionDiv>
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <br />
+                <DonateCard
+                  currentDonation={curren_donation}
+                  donationGoal={donation_goal}
+                  title={name}
+                />
+              </Grid>
+            </Grid>
+          </div>
+        </HeaderAndFooterWrapper>
+      </MainInnerDiv>
+    </MainBgDiv>
   );
 }

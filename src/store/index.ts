@@ -8,7 +8,6 @@ const reducer = combineReducers({
   bene: beneReducer,
   donor: donorReducer,
   donation: donationReducer,
-  // here we will be adding reducers
 });
 const store = configureStore({
   reducer,

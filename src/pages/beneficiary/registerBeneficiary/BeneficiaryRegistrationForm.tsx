@@ -3,6 +3,14 @@ import { TextField, Typography, Button, Grid } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { createBeneficiary } from "../../../store/slices/beneficiarySlice";
 import { AppDispatch } from "../../../store";
+import styled from "styled-components";
+
+const StyledTextField = styled(TextField)`
+  .MuiInputBase-root {
+    background-color: #d58855;
+    color: white;
+  }
+`;
 
 const formFields = [
   { label: "Name", name: "name", type: "text" },
@@ -60,14 +68,17 @@ export default function BeneficiaryRegistrationForm({
             Please register with your details
           </Typography>
           <br />
-          <Typography>
+          <Typography variant="h5">
             You may find millions of donors who love that keeps you alive.
           </Typography>
           <div style={{ paddingTop: "20px" }}>
             {formFields.map((val, key) =>
               val.type === "longText" ? (
                 <div key={key} style={{ paddingBottom: "5px" }}>
-                  <TextField
+                  <StyledTextField
+                    InputLabelProps={{
+                      style: { color: "#fff" },
+                    }}
                     id={val.name}
                     multiline
                     rows={4}
@@ -79,7 +90,10 @@ export default function BeneficiaryRegistrationForm({
                 </div>
               ) : (
                 <div key={key} style={{ paddingBottom: "5px" }}>
-                  <TextField
+                  <StyledTextField
+                    InputLabelProps={{
+                      style: { color: "#fff" },
+                    }}
                     type={val.type === "number" ? "number" : "text"}
                     fullWidth
                     label={val.label}

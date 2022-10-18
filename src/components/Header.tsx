@@ -1,5 +1,3 @@
-//import '../styles/header.css'
-
 import styles from "styled-components";
 
 import { NavLink } from "react-router-dom";
@@ -56,10 +54,7 @@ function Header() {
     localStorage.getItem("token") && setUser(true);
   }, []);
 
-  const logoutHandler = () => {
-    localStorage.removeItem("token");
-    setUser(false);
-  };
+  
 
   return (
     <HeaderWrapper>

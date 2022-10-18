@@ -1,9 +1,15 @@
-import { TextField, Button } from "@mui/material";
 import React from "react";
+import { TextField, Button } from "@mui/material";
+import styles from "styled-components";
 import { CountryDropdown } from "react-country-region-selector";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
 import { createNewDonor } from "../../../store/slices/donorSlice";
+
+const OuterDiv = styles.div`
+padding: 20px;
+border-radius: 20px;
+`;
 
 const formFields = [
   { label: "First Name", name: "fName", type: "text" },
@@ -45,15 +51,10 @@ export default function DonerInformationForm({
     if (isLoading === "completed") {
       setIsConinue(true);
     }
-  }, [isLoading]);
+  }, [isLoading,setIsConinue]);
 
   return (
-    <div
-      style={{
-        padding: "20px",
-        borderRadius: "20px",
-      }}
-    >
+    <OuterDiv>
       <br />
 
       {formFields.map((val, key) => (
@@ -74,7 +75,7 @@ export default function DonerInformationForm({
       {!isContinue && (
         <div>
           <br />
-          {isLoading == "idle" ? (
+          {isLoading === "idle" ? (
             <Button
               onClick={handleSubmitData}
               variant="contained"
@@ -91,6 +92,6 @@ export default function DonerInformationForm({
           <br />
         </div>
       )}
-    </div>
+    </OuterDiv>
   );
 }

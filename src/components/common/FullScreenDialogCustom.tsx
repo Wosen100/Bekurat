@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
+import bgImage from '../../images/candel.jpg'
 import { TransitionProps } from "@mui/material/transitions";
 
 interface FullScreenDialogProps {
@@ -67,7 +68,11 @@ export default function FullScreenDialogCustom({
             </Typography>
           </Toolbar>
         </AppBar>
-        {mainLayout}
+        <div style={{ width: "100vw", position: 'fixed', backgroundImage: `url(${bgImage})`, height: '100vh', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
+          <div style={{ position: "absolute", width: "100vw", overflow: "scroll", height: '100%' }}>
+            {mainLayout}
+          </div>
+        </div>
       </Dialog>
     </div>
   );

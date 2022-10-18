@@ -3,34 +3,35 @@ import { Navigate } from "react-router-dom";
 import styled from "styled-components";
 
 const FormWrapper = styled.div`
-
-h3{
-  text-align:center
-}
-
-form{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction: column;
-  gap: 0.75em;
-}
-
-input{
-  padding:12px;
-}
-
-button {
-  padding: 12px 24px;
-  background: yellow;
-  font-size: 16px;
-  font-weight: 600;
-  border: 1px solid black;
-  border-radius: 12px;
-
-}
-
-`
+  h3 {
+    text-align: center;
+  }
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.75em;
+  }
+  input {
+    padding: 15px;
+    width: 90%;
+    background-color: #d58855;
+    color: white;
+    border: none;
+    ::placeholder {
+      color: white;
+    }
+  }
+  button {
+    padding: 12px 24px;
+    background: yellow;
+    font-size: 16px;
+    font-weight: 600;
+    border: 1px solid black;
+    border-radius: 12px;
+  }
+`;
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -82,10 +83,7 @@ const Login = () => {
   return (
     <div>
       <FormWrapper className="form-container">
-      
-
-      {error.error && <label style={{ color: "red" }}>{error.message}</label>}
-      {user && <Navigate to="/beneficiaries" replace={true} />}
+        {user && <Navigate to="/beneficiaries" replace={true} />}
         <form onSubmit={submitHandler}>
           <input
             type="email"
@@ -97,7 +95,16 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <button style={{backgroundColor:"green", color:'white'}}>Sign In <br /> ወደ አካውንትዎ በዚህ ይግቡ </button>
+          {error.error && (
+            <label
+              style={{ color: "red", background: "white", padding: "10px" }}
+            >
+              {error.message}
+            </label>
+          )}
+          <button style={{ backgroundColor: "green", color: "white" }}>
+            Sign In <br /> ወደ አካውንትዎ በዚህ ይግቡ{" "}
+          </button>
         </form>
       </FormWrapper>
     </div>

@@ -3,11 +3,6 @@ import ReactCreditCard from "@repay/react-credit-card";
 import "@repay/react-credit-card/dist/react-credit-card.css";
 import { Typography } from "@mui/material";
 
-const formFields = [
-  { label: "Card number", name: "cardnumber", type: "number" },
-  { label: "MM/YY", name: "monthYear", type: "text" },
-];
-
 export default function CreditCardComponent() {
   const [values, setValues] = React.useState({
     name: "",
@@ -32,15 +27,7 @@ export default function CreditCardComponent() {
 
   return (
     <form>
-      <div
-        style={
-          {
-            // border: "2px solid green",
-            // padding: "20px",
-            // borderRadius: "20px",
-          }
-        }
-      >
+      <div>
         <Typography>
           <b>Credit or debit </b>
         </Typography>

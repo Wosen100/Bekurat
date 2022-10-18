@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Typography, Grid } from "@mui/material";
+import { Card, Typography } from "@mui/material";
 import LinearProgressBar from "../common/LinearProgressBar";
 
 interface SingleBeneficiaryProps {
@@ -28,7 +28,7 @@ export default function SingleBeneficiaryCard({
         justifyContent: "space-between",
       }}
     >
-      <img src={image} style={{ width: "100%" }} />
+      <img src={image} style={{ width: "100%" }} alt={name} />
 
       <Typography style={{ color: "green", fontWeight: "700" }}>
         {address}

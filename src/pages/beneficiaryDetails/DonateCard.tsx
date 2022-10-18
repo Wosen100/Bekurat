@@ -1,6 +1,5 @@
 import { Button, Card, Typography } from "@mui/material";
 import LinearProgressBar from "../../components/common/LinearProgressBar";
-import { RWebShare } from "react-web-share";
 import FullScreenDialogCustom from "../../components/common/FullScreenDialogCustom";
 import React from "react";
 import { useDispatch } from "react-redux";

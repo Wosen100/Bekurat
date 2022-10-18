@@ -27,6 +27,7 @@ export default function SuccessComponent({ type, text }: SuccessCompoentProps) {
               ? "http://localhost:5001/113967-thank-you.gif"
               : "http://localhost:5001/91001-success.gif"
           }
+          alt={"laoding"}
         />
       </div>
     </div>

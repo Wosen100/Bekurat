@@ -5,7 +5,6 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import React from "react";
 
 interface DonateValueComponentProps {
   image: string;
@@ -28,7 +27,7 @@ export default function DonateValueComponent({
     <div>
       <Grid item container>
         <Grid item xs={12} sm={4}>
-          <img src={image} style={{ width: "100%", borderRadius: "2px" }} />
+          <img src={image} style={{ width: "100%", borderRadius: "2px" }} alt={name} />
         </Grid>
         <Grid item xs={1}></Grid>
         <Grid item xs={12} sm={6}>

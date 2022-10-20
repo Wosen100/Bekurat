@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { combineReducers } from "redux";
-import beneReducer from "./slices/beneficiarySlice";
-import donorReducer from "./slices/donorSlice";
-import donationReducer from "./slices/donationSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
+import beneReducer from './slices/beneficiarySlice';
+import donorReducer from './slices/donorSlice';
+import donationReducer from './slices/donationSlice';
 
 const reducer = combineReducers({
   bene: beneReducer,

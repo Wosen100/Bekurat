@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
-import styled from "styled-components";
+import React, { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 const FormWrapper = styled.div`
   h3 {
@@ -34,41 +34,41 @@ const FormWrapper = styled.div`
 `;
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [user, setUser] = useState(false);
 
   useEffect(() => {
-    localStorage.getItem("token") && setUser(true);
+    localStorage.getItem('token') && setUser(true);
   }, []);
 
   const [error, setError] = useState({
     error: false,
-    message: "",
+    message: '',
   });
 
   const submitHandler = async (event: any) => {
     event.preventDefault();
     setError({
       error: false,
-      message: "",
+      message: '',
     });
     const user = {
       email,
       password,
     };
 
-    const req = await fetch("http://localhost:5001/api/auth/login", {
-      method: "POST",
+    const req = await fetch('http://localhost:5001/api/auth/login', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(user),
     });
 
     const res = await req.json();
     if (res.success) {
-      localStorage.setItem("token", res.token);
+      localStorage.setItem('token', res.token);
       console.log(res);
       setUser(true);
     } else {
@@ -82,28 +82,14 @@ const Login = () => {
 
   return (
     <div>
-      <FormWrapper className="form-container">
-        {user && <Navigate to="/beneficiaries" replace={true} />}
+      <FormWrapper className='form-container'>
+        {user && <Navigate to='/beneficiaries' replace={true} />}
         <form onSubmit={submitHandler}>
-          <input
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-          />
-          <input
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-          />
-          {error.error && (
-            <label
-              style={{ color: "red", background: "white", padding: "10px" }}
-            >
-              {error.message}
-            </label>
-          )}
-          <button style={{ backgroundColor: "green", color: "white" }}>
-            Sign In <br /> ወደ አካውንትዎ በዚህ ይግቡ{" "}
+          <input type='email' onChange={e => setEmail(e.target.value)} placeholder='Email' />
+          <input type='password' onChange={e => setPassword(e.target.value)} placeholder='Password' />
+          {error.error && <label style={{ color: 'red', background: 'white', padding: '10px' }}>{error.message}</label>}
+          <button style={{ backgroundColor: 'green', color: 'white' }}>
+            Sign In <br /> ወደ አካውንትዎ በዚህ ይግቡ{' '}
           </button>
         </form>
       </FormWrapper>

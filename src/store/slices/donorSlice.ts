@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 interface Donor {
   _id: string;
@@ -16,36 +16,30 @@ interface DonorState {
 
 const initialState: DonorState = {
   newDonor: null,
-  createDonorLoading: "idle",
+  createDonorLoading: 'idle',
 };
 
-export const createNewDonor = createAsyncThunk(
-  "donor/create",
-  async (donor: any) => {
-    console.log(donor);
-    const res = await axios.post("http://localhost:5001/donor/add", donor);
-    return res.data.message.donor;
-  }
-);
+export const createNewDonor = createAsyncThunk('donor/create', async (donor: any) => {
+  console.log(donor);
+  const res = await axios.post('http://localhost:5001/donor/add', donor);
+  return res.data.message.donor;
+});
 
 export const DonorSlice = createSlice({
-  name: "donor",
+  name: 'donor',
   initialState,
   reducers: {
     clearCreateDonorLoading: (state, action) => {
-      state.createDonorLoading = "idle";
+      state.createDonorLoading = 'idle';
     },
   },
   extraReducers(builder) {
-    builder.addCase(
-      createNewDonor.fulfilled,
-      (state, action: PayloadAction<Donor>) => {
-        state.newDonor = action.payload;
-        state.createDonorLoading = "completed";
-      }
-    );
+    builder.addCase(createNewDonor.fulfilled, (state, action: PayloadAction<Donor>) => {
+      state.newDonor = action.payload;
+      state.createDonorLoading = 'completed';
+    });
     builder.addCase(createNewDonor.pending, (state, action) => {
-      state.createDonorLoading = "loading";
+      state.createDonorLoading = 'loading';
     });
   },
 });

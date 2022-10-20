@@ -1,9 +1,9 @@
-import styles from "styled-components";
-import bgImage from "../images/candel.jpg";
-import { Link, NavLink } from "react-router-dom";
-import HeaderAndFooterWrapper from "../components/HeaderAndFooterWrapper";
-import Login from "./auth/Login";
-import { Grid, Typography } from "@mui/material";
+import styles from 'styled-components';
+import bgImage from '../images/candel.jpg';
+import { Link, NavLink } from 'react-router-dom';
+import HeaderAndFooterWrapper from '../components/HeaderAndFooterWrapper';
+import Login from './auth/Login';
+import { Grid, Typography } from '@mui/material';
 
 const MainHeaderWrapper = styles.div`
 padding-top: 100px;
@@ -54,40 +54,29 @@ const LandingPage = () => {
           <Grid item xs={6} sm={6}>
             <DescriptionDiv>
               <Typography>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. In,
-                rem minima. Earum asperiores incidunt pariatur maxime, delectus
-                magnam veniam unde error quia officiis hic cupiditate
-                voluptates. Nihil perspiciatis explicabo neque. Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Voluptate quam
-                nesciunt dicta impedit, saepe eveniet provident necessitatibus
-                error laboriosam corrupti nihil quod molestias neque, enim hic
-                perspiciatis in! Molestias, sed!
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. In, rem minima. Earum asperiores incidunt
+                pariatur maxime, delectus magnam veniam unde error quia officiis hic cupiditate voluptates. Nihil
+                perspiciatis explicabo neque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate quam
+                nesciunt dicta impedit, saepe eveniet provident necessitatibus error laboriosam corrupti nihil quod
+                molestias neque, enim hic perspiciatis in! Molestias, sed!
               </Typography>
               <br />
-              <NavLink
-                to="/beneficiaries"
-                style={{ textDecoration: "none", cursor: "pointer" }}
-              >
-                <FundButton>Start Your Fundrasing Here!</FundButton>{" "}
+              <NavLink to='/beneficiaries' style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                <FundButton>Start Your Fundrasing Here!</FundButton>{' '}
               </NavLink>
             </DescriptionDiv>
           </Grid>
 
           <Grid item xs={6} sm={6}>
-            <Grid
-              container
-              justifyContent={"center"}
-              flexDirection="column"
-              alignItems={"center"}
-            >
+            <Grid container justifyContent={'center'} flexDirection='column' alignItems={'center'}>
               <Login />
               <br />
               <span>
-                {" "}
-                Don't have and account?{" "}
-                <Link to="/signup">
-                  {" "}
-                  Sign Up <br /> አካውንት ከሌለዎት፤ እዚህ ጋር ተጭነው አካውንት ይፍጠሩ::{" "}
+                {' '}
+                Don't have and account?{' '}
+                <Link to='/signup'>
+                  {' '}
+                  Sign Up <br /> አካውንት ከሌለዎት፤ እዚህ ጋር ተጭነው አካውንት ይፍጠሩ::{' '}
                 </Link>
               </span>
             </Grid>

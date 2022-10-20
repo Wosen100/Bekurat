@@ -1,7 +1,6 @@
-import styles from "styled-components";
-
-import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import styles from 'styled-components';
+import { NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const HeaderWrapper = styles.header`
 width:100%;
@@ -43,31 +42,32 @@ background-color:lightgreen;
     }
 `;
 
-
-
-const navItems = [{ text: "Home", link: "/" }, { text: "Beneficiary", link: "/beneficiaries" }];
+const navItems = [
+  { text: 'Home', link: '/' },
+  { text: 'Beneficiary', link: '/beneficiaries' },
+];
 
 function Header() {
   const [user, setUser] = useState(false);
 
   useEffect(() => {
-    localStorage.getItem("token") && setUser(true);
+    localStorage.getItem('token') && setUser(true);
   }, []);
-
-  
 
   return (
     <HeaderWrapper>
       <NavWrapper>
         <ul>
           {navItems.map((val, key) => {
-            return <li key={key}>
-              <NavLink to={val.link}>{val.text}</NavLink>
-            </li>
+            return (
+              <li key={key}>
+                <NavLink to={val.link}>{val.text}</NavLink>
+              </li>
+            );
           })}
           {user ? (
             <li>
-              <NavLink to="/signout">Sign Out</NavLink>
+              <NavLink to='/signout'>Sign Out</NavLink>
             </li>
           ) : (
             <>

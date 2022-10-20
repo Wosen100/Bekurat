@@ -1,10 +1,10 @@
-import styles from "styled-components";
-import { Grid, Typography } from "@mui/material";
-import bgImage from "../images/candel.jpg";
-import { useSelector } from "react-redux";
-import HeaderAndFooterWrapper from "../components/HeaderAndFooterWrapper";
-import { RootState } from "../store";
-import DonateCard from "./beneficiaryDetails/DonateCard";
+import styles from 'styled-components';
+import { Grid, Typography } from '@mui/material';
+import bgImage from '../images/candel.jpg';
+import { useSelector } from 'react-redux';
+import HeaderAndFooterWrapper from '../components/HeaderAndFooterWrapper';
+import { RootState } from '../store';
+import DonateCard from './beneficiaryDetails/DonateCard';
 
 const MainBgDiv = styles.div`
 background-image:url(${bgImage});
@@ -30,44 +30,38 @@ margin-top: 30px;
 padding: 20px;
 `;
 
-export default function BeneficiaryDetails() {
-  const selectedBeneficiary = useSelector(
-    (state: RootState) => state.bene.selectedBeneficiary
-  );
+const DonateCardWrapper = styles.div`
+marginTop:10px;
+`;
 
-  const { name, image, description, donation_goal, curren_donation } =
-    selectedBeneficiary!;
+export default function BeneficiaryDetails() {
+  const selectedBeneficiary = useSelector((state: RootState) => state.bene.selectedBeneficiary);
+
+  const { name, image, description, donation_goal, curren_donation } = selectedBeneficiary!;
 
   return (
     <MainBgDiv>
       <MainInnerDiv>
         <HeaderAndFooterWrapper>
-          <div style={{ padding: "60px 100px" }}>
+          <div style={{ padding: '60px 100px' }}>
             <Grid container>
               <Grid item xs={12}>
-                <Typography
-                  style={{ fontWeight: "bold", color: "white" }}
-                  variant={"h4"}
-                >
+                <Typography style={{ fontWeight: 'bold', color: 'white' }} variant={'h4'}>
                   {name}
                 </Typography>
               </Grid>
 
               <Grid item xs={12} sm={6}>
-                <br />
-                <img src={image} style={{ width: "100%" }} alt={name}/>
+                <img src={image} style={{ width: '100%', marginTop: '10px' }} alt={name} />
 
                 <DescriptionDiv>
                   <Typography>{description}</Typography>
                 </DescriptionDiv>
               </Grid>
               <Grid item xs={12} sm={4}>
-                <br />
-                <DonateCard
-                  currentDonation={curren_donation}
-                  donationGoal={donation_goal}
-                  title={name}
-                />
+                <DonateCardWrapper>
+                  <DonateCard currentDonation={curren_donation} donationGoal={donation_goal} title={name} />
+                </DonateCardWrapper>
               </Grid>
             </Grid>
           </div>

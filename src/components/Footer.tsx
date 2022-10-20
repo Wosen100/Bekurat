@@ -13,12 +13,8 @@ display:flex;
 justify-content:center;
 `;
 
-function Footer(){
-    return(
-        <FooterWrapper>
-            developed by Wosen-Konjo 2022
-        </FooterWrapper>
-    )
+function Footer() {
+  return <FooterWrapper>developed by Wosen-Konjo 2022</FooterWrapper>;
 }
 
 export default Footer;

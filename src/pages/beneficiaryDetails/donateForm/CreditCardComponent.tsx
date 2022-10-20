@@ -1,48 +1,43 @@
-import React from "react";
-import ReactCreditCard from "@repay/react-credit-card";
-import "@repay/react-credit-card/dist/react-credit-card.css";
-import { Typography } from "@mui/material";
+import React from 'react';
+import ReactCreditCard from '@repay/react-credit-card';
+import '@repay/react-credit-card/dist/react-credit-card.css';
+import { Typography } from '@mui/material';
 
 export default function CreditCardComponent() {
   const [values, setValues] = React.useState({
-    name: "",
-    number: "",
-    expiration: "",
-    cvc: "",
+    name: '',
+    number: '',
+    expiration: '',
+    cvc: '',
   });
   const handleChange = React.useCallback(
     (event: any) => {
       const { name, value } = event.target;
-      setValues((v) => ({ ...v, [name]: value }));
+      setValues(v => ({ ...v, [name]: value }));
     },
-    [setValues]
+    [setValues],
   );
 
   const [focused, setFocus] = React.useState<any | undefined>(undefined);
-  const handleFocus = React.useCallback(
-    (event: any) => setFocus(event.target.name as any),
-    [setFocus]
-  );
+  const handleFocus = React.useCallback((event: any) => setFocus(event.target.name as any), [setFocus]);
   const handleBlur = React.useCallback(() => setFocus(undefined), [setFocus]);
 
   return (
     <form>
       <div>
-        <Typography>
-          <b>Credit or debit </b>
-        </Typography>
+        <Typography sx={{ fontWeight: 'bold' }}>Credit or debit</Typography>
         <br />
         <fieldset
           style={{
-            border: "none",
-            display: "flex",
-            justifyContent: "space-between",
+            border: 'none',
+            display: 'flex',
+            justifyContent: 'space-between',
           }}
         >
           <label>Name on card</label>
           <input
-            data-testid="nameonthcard"
-            name="name"
+            data-testid='nameonthcard'
+            name='name'
             onChange={handleChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -51,15 +46,15 @@ export default function CreditCardComponent() {
         </fieldset>
         <fieldset
           style={{
-            border: "none",
-            display: "flex",
-            justifyContent: "space-between",
+            border: 'none',
+            display: 'flex',
+            justifyContent: 'space-between',
           }}
         >
           <label>Card Number</label>
           <input
-            data-testid="cardnumber"
-            name="number"
+            data-testid='cardnumber'
+            name='number'
             onChange={handleChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -68,16 +63,16 @@ export default function CreditCardComponent() {
         </fieldset>
         <fieldset
           style={{
-            border: "none",
-            display: "flex",
-            justifyContent: "space-between",
+            border: 'none',
+            display: 'flex',
+            justifyContent: 'space-between',
           }}
         >
           <label>Expiration</label>
           <input
-            data-testid="expiration"
-            name="expiration"
-            placeholder="MM/YY"
+            data-testid='expiration'
+            name='expiration'
+            placeholder='MM/YY'
             onChange={handleChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -86,16 +81,16 @@ export default function CreditCardComponent() {
         </fieldset>
         <fieldset
           style={{
-            marginBottom: "20px",
-            border: "none",
-            display: "flex",
-            justifyContent: "space-between",
+            marginBottom: '20px',
+            border: 'none',
+            display: 'flex',
+            justifyContent: 'space-between',
           }}
         >
           <label>CVC</label>
           <input
-            data-testid="cvc"
-            name="cvc"
+            data-testid='cvc'
+            name='cvc'
             onChange={handleChange}
             onFocus={handleFocus}
             onBlur={handleBlur}

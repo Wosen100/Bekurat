@@ -1,8 +1,8 @@
-import { Grid, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
-import bgImage from "../../images/candel.jpg";
-import styles from "styled-components";
+import { Grid, TextField, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import bgImage from '../../images/candel.jpg';
+import styles from 'styled-components';
 
 const StyledTextField = styles(TextField)`
   .MuiInputBase-root {
@@ -53,42 +53,36 @@ button{
 `;
 
 const Register = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
   const [user, setUser] = useState(false);
 
   useEffect(() => {
-    localStorage.getItem("token") && setUser(true);
+    localStorage.getItem('token') && setUser(true);
   }, []);
 
   const [error, setError] = useState({
     error: false,
-    message: "",
+    message: '',
   });
 
   const submitHandler = async (event: any) => {
     event.preventDefault();
 
-    if (
-      firstName.length > 0 &&
-      lastName.length > 0 &&
-      email.length > 0 &&
-      password.length > 0 &&
-      password2.length > 0
-    ) {
+    if (firstName.length && lastName.length && email.length && password.length && password2.length) {
       if (password !== password2) {
         setError({
           error: true,
-          message: "Both passwords should match",
+          message: 'Both passwords should match',
         });
         return;
       } else {
         setError({
           error: false,
-          message: "",
+          message: '',
         });
       }
 
@@ -99,10 +93,10 @@ const Register = () => {
         password,
       };
 
-      const req = await fetch("http://localhost:5001/api/auth/register", {
-        method: "POST",
+      const req = await fetch('http://localhost:5001/api/auth/register', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(user),
       });
@@ -114,7 +108,7 @@ const Register = () => {
           message: res.message,
         });
 
-        window.location.href = "/beneficiaries";
+        window.location.href = '/beneficiaries';
       } else {
         setError({
           error: true,
@@ -124,96 +118,92 @@ const Register = () => {
     } else {
       setError({
         error: true,
-        message: "Fill all the required fields",
+        message: 'Fill all the required fields',
       });
     }
   };
   return (
     <MainBgDiv>
       <MainInnerDiv>
-        {user && <Navigate to="/beneficiaries" replace={true} />}
+        {user && <Navigate to='/beneficiaries' replace={true} />}
         <Grid container>
           <Grid item xs={1} sm={2} md={3} lg={4}></Grid>
           <Grid item xs={10} sm={8} md={6} lg={4}>
             <SignUpSectionWrapper>
               <h1>Sign Up</h1>
-              <div className="form-container">
+              <div className='form-container'>
                 <form onSubmit={submitHandler}>
                   <Grid container spacing={1}>
                     <Grid item xs={12}>
                       <div>
-                        <Typography style={{ color: "white" }}>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Tempore assumenda ipsam dicta sit perspiciatis
-                          dolorem nobis quia dolores, ratione aut! Cumque
-                          perspiciatis nesciunt inventore officia molestiae
-                          dignissimos nulla iste quam.
+                        <Typography style={{ color: 'white' }}>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore assumenda ipsam dicta sit
+                          perspiciatis dolorem nobis quia dolores, ratione aut! Cumque perspiciatis nesciunt inventore
+                          officia molestiae dignissimos nulla iste quam.
                         </Typography>
                       </div>
                     </Grid>
                     <Grid item xs={6}>
                       <StyledTextField
                         InputLabelProps={{
-                          style: { color: "#fff" },
+                          style: { color: '#fff' },
                         }}
                         fullWidth
-                        type="text"
-                        onChange={(e) => setFirstName(e.target.value)}
-                        label="First Name"
+                        type='text'
+                        onChange={e => setFirstName(e.target.value)}
+                        label='First Name'
                       />
                     </Grid>
                     <Grid item xs={6}>
                       <StyledTextField
                         InputLabelProps={{
-                          style: { color: "#fff" },
+                          style: { color: '#fff' },
                         }}
                         fullWidth
-                        type="text"
-                        onChange={(e) => setLastName(e.target.value)}
-                        label="Last Name"
+                        type='text'
+                        onChange={e => setLastName(e.target.value)}
+                        label='Last Name'
                       />
                     </Grid>
                   </Grid>
                   <Grid item sx={{ pt: 1 }}>
                     <StyledTextField
                       InputLabelProps={{
-                        style: { color: "#fff" },
+                        style: { color: '#fff' },
                       }}
-                      type="email"
+                      type='email'
                       fullWidth
-                      onChange={(e) => setEmail(e.target.value)}
-                      label="Email"
+                      onChange={e => setEmail(e.target.value)}
+                      label='Email'
                     />
                   </Grid>
                   <Grid item sx={{ pt: 1 }}>
                     <StyledTextField
                       InputLabelProps={{
-                        style: { color: "#fff" },
+                        style: { color: '#fff' },
                       }}
-                      type="password"
+                      type='password'
                       fullWidth
-                      onChange={(e) => setPassword(e.target.value)}
-                      label="Password"
+                      onChange={e => setPassword(e.target.value)}
+                      label='Password'
                     />
                   </Grid>
                   <Grid item sx={{ pt: 1 }}>
                     <StyledTextField
                       InputLabelProps={{
-                        style: { color: "#fff" },
+                        style: { color: '#fff' },
                       }}
                       fullWidth
-                      type="password"
-                      onChange={(e) => setPassword2(e.target.value)}
-                      label="Re Enter Password"
+                      type='password'
+                      onChange={e => setPassword2(e.target.value)}
+                      label='Re Enter Password'
                     />
                   </Grid>
                   <Grid item sx={{ pt: 1 }}>
                     <button>Submit</button>
                     <br />
                     <br />
-                    {error.error && (
-                      <label style={{ color: "red" }}>{error.message}</label>
-                    )}
+                    {error.error && <label style={{ color: 'red' }}>{error.message}</label>}
                   </Grid>
                 </form>
               </div>

@@ -18,7 +18,7 @@ const initialState: DonationState = {
 };
 
 export const createDonation = createAsyncThunk('donation/create', async (donation: any) => {
-  const res = await axios.post('http://localhost:5001/donation/create', donation);
+  const res = await axios.post('/donation/create', donation);
   return res.data;
 });
 

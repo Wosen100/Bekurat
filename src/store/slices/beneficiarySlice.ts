@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { DonateUpdateType } from '../../pages/beneficiaryDetails/DonateForm';
 
 export const getBeneficiaries = createAsyncThunk('beneficiary/getBeneficiaries', async () => {
-  const res = await axios.get('http://localhost:5001/beneficiary/get');
+  const res = await axios.get('/beneficiary/get');
   console.log(res);
   return res.data.beneficiaries;
 });
@@ -12,22 +13,21 @@ export const createBeneficiary = createAsyncThunk('beneficiary/createBeneficiary
 
   let imagepath = await uploadImage(imageFile);
 
-  const createBeneficiaryResponse = await axios.post('http://localhost:5001/beneficiary/add', {
+  const createBeneficiaryResponse = await axios.post('/beneficiary/add', {
     ...beneficiary,
     image: imagepath ? imagepath : '',
   });
   return createBeneficiaryResponse.data.message.beneficiary;
 });
 
-export const updateWithDonate = createAsyncThunk('beneficiary/donate', async (params: any) => {
+export const updateWithDonate = createAsyncThunk('beneficiary/donate', async (params: DonateUpdateType) => {
   let { _id, donation } = params;
-  const beneUpdateRes = await axios.put('http://localhost:5001/beneficiary/donate', { _id, donation });
-  console.log(beneUpdateRes.data);
+  const beneUpdateRes = await axios.put('/beneficiary/donate', { _id, donation });
   return beneUpdateRes.data;
 });
 
 const uploadImage = async (imageFile: any) => {
-  const uploadRes = await axios.post('http://localhost:5001/beneficiary/upload', imageFile, {
+  const uploadRes = await axios.post('/beneficiary/upload', imageFile, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -62,6 +62,7 @@ const initialState = {
   selectedBeneficiary: null,
   updateBeneLoading: 'idle',
 } as BeneState;
+
 export const BeneSlices = createSlice({
   name: 'beneficiary',
   initialState,

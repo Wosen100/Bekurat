@@ -1,6 +1,6 @@
 import { Grid, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import bgImage from '../../images/candel.jpg';
 import styles from 'styled-components';
 
@@ -12,12 +12,12 @@ const StyledTextField = styles(TextField)`
 `;
 
 const MainBgDiv = styles.div`
-background-image:url(${bgImage});
-width:100vw;
-height:100vh;
-position:fixed;
-background-size:cover;
-background-repeat:no-repeat;
+  background-image:url(${bgImage});
+  width:100vw;
+  height:100vh;
+  position:fixed;
+  background-size:cover;
+  background-repeat:no-repeat;
 `;
 
 const MainInnerDiv = styles.div`
@@ -52,13 +52,16 @@ button{
 
 `;
 
-const Register = () => {
+export default function Register() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [user, setUser] = useState(false);
+
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     localStorage.getItem('token') && setUser(true);
@@ -69,8 +72,8 @@ const Register = () => {
     message: '',
   });
 
-  const submitHandler = async (event: any) => {
-    event.preventDefault();
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
     if (firstName.length && lastName.length && email.length && password.length && password2.length) {
       if (password !== password2) {
@@ -93,7 +96,7 @@ const Register = () => {
         password,
       };
 
-      const req = await fetch('http://localhost:5001/api/auth/register', {
+      const req = await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -108,7 +111,7 @@ const Register = () => {
           message: res.message,
         });
 
-        window.location.href = '/beneficiaries';
+        navigate('/beneficiaries');
       } else {
         setError({
           error: true,
@@ -216,4 +219,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -33,7 +33,7 @@ const FormWrapper = styled.div`
   }
 `;
 
-const Login = () => {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(false);
@@ -47,8 +47,8 @@ const Login = () => {
     message: '',
   });
 
-  const submitHandler = async (event: any) => {
-    event.preventDefault();
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setError({
       error: false,
       message: '',
@@ -58,7 +58,7 @@ const Login = () => {
       password,
     };
 
-    const req = await fetch('http://localhost:5001/api/auth/login', {
+    const req = await fetch('/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -97,4 +97,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+

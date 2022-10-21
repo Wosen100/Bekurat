@@ -59,5 +59,6 @@
   "devDependencies": {
     "@types/jsonwebtoken": "^8.5.9",
     "@types/styled-components": "^5.1.26"
-  }
+  },
+  "proxy":"http://localhost:5001"
 }

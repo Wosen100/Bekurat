@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-interface Donor {
+export interface Donor {
   _id: string;
   fname: string;
   lName: string;
   email: string;
   postalCode: string;
+  country: string;
 }
 
 interface DonorState {
@@ -19,9 +20,8 @@ const initialState: DonorState = {
   createDonorLoading: 'idle',
 };
 
-export const createNewDonor = createAsyncThunk('donor/create', async (donor: any) => {
-  console.log(donor);
-  const res = await axios.post('http://localhost:5001/donor/add', donor);
+export const createNewDonor = createAsyncThunk('donor/create', async (donor: Donor) => {
+  const res = await axios.post('/donor/add', donor);
   return res.data.message.donor;
 });
 

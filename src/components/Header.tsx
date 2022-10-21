@@ -47,7 +47,7 @@ const navItems = [
   { text: 'Beneficiary', link: '/beneficiaries' },
 ];
 
-function Header() {
+export default function Header() {
   const [user, setUser] = useState(false);
 
   useEffect(() => {
@@ -58,9 +58,9 @@ function Header() {
     <HeaderWrapper>
       <NavWrapper>
         <ul>
-          {navItems.map((val, key) => {
+          {navItems.map((val) => {
             return (
-              <li key={key}>
+              <li key={val.text}>
                 <NavLink to={val.link}>{val.text}</NavLink>
               </li>
             );
@@ -71,12 +71,7 @@ function Header() {
             </li>
           ) : (
             <>
-              {/* <li>
-                <NavLink to="/signin">Sign In</NavLink>
-              </li>
-              <li>
-                <NavLink to="/signup">Sign Up</NavLink>
-              </li> */}
+
             </>
           )}
         </ul>
@@ -85,4 +80,4 @@ function Header() {
   );
 }
 
-export default Header;
+

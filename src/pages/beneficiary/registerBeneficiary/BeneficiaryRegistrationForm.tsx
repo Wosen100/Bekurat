@@ -31,7 +31,7 @@ export default function BeneficiaryRegistrationForm({ setOpen }: RegisterBenefic
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBeneficiaryObj({
       ...beneficiaryObj,
       [e.target.name]: e.target.value,
@@ -61,9 +61,9 @@ export default function BeneficiaryRegistrationForm({ setOpen }: RegisterBenefic
           <br />
           <Typography variant='h5'>You may find millions of donors who love that keeps you alive.</Typography>
           <div style={{ paddingTop: '20px' }}>
-            {formFields.map((val, key) =>
+            {formFields.map((val) =>
               val.type === 'longText' ? (
-                <div key={key} style={{ paddingBottom: '5px' }}>
+                <div key={val.name} style={{ paddingBottom: '5px' }}>
                   <StyledTextField
                     InputLabelProps={{
                       style: { color: '#fff' },
@@ -78,7 +78,7 @@ export default function BeneficiaryRegistrationForm({ setOpen }: RegisterBenefic
                   />
                 </div>
               ) : (
-                <div key={key} style={{ paddingBottom: '5px' }}>
+                <div key={val.name} style={{ paddingBottom: '5px' }}>
                   <StyledTextField
                     InputLabelProps={{
                       style: { color: '#fff' },

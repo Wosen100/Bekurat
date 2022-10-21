@@ -8,6 +8,11 @@ import CreditCardComponent from './donateForm/CreditCardComponent';
 import DonateValueComponent from './donateForm/DonateValueComponent';
 import DonerInformationForm from './donateForm/DonerInformationForm';
 
+export interface DonateUpdateType {
+  _id: string | undefined;
+  donation: number;
+}
+
 export default function DonateForm() {
   const selectedBeneficiary = useSelector((state: RootState) => state.bene.selectedBeneficiary);
 

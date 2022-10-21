@@ -18,6 +18,15 @@ const formFields = [
   { label: 'Postal code', name: 'postalCode', type: 'text' },
 ];
 
+interface Donor {
+  _id: string;
+  fname: string;
+  lName: string;
+  email: string;
+  postalCode: string;
+  country: string;
+}
+
 interface DonerInfoProp {
   isContinue: boolean;
   setIsConinue: Function;
@@ -31,7 +40,7 @@ export default function DonerInformationForm({ isContinue, setIsConinue }: Doner
 
   const dispath = useDispatch<AppDispatch>();
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDonerObj({
       ...donerObj,
       [e.target.name]: e.target.value,
@@ -39,7 +48,7 @@ export default function DonerInformationForm({ isContinue, setIsConinue }: Doner
   };
 
   const handleSubmitData = () => {
-    dispath(createNewDonor({ ...donerObj, country: country }));
+    dispath(createNewDonor({ ...donerObj, country: country } as Donor));
   };
 
   React.useEffect(() => {
@@ -52,8 +61,8 @@ export default function DonerInformationForm({ isContinue, setIsConinue }: Doner
     <OuterDiv>
       <br />
 
-      {formFields.map((val, key) => (
-        <div key={key} style={{ paddingBottom: '5px' }}>
+      {formFields.map(val => (
+        <div key={val.name} style={{ paddingBottom: '5px' }}>
           <TextField fullWidth label={val.label} name={val.name} onChange={handleChange} />
         </div>
       ))}

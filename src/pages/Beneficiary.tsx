@@ -44,7 +44,7 @@ height: 100%;
 margin: 10px;
 `;
 
-const Beneficiary = () => {
+export default function Beneficiary() {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch<AppDispatch>();
@@ -75,7 +75,7 @@ const Beneficiary = () => {
             </Grid>
             <Grid item xs={2}>
               <FullScreenDialogCustom
-                handleClick={() => {}}
+                handleClick={() => { }}
                 open={open}
                 setOpen={handleOpen}
                 title='Register New Beneficiary'
@@ -88,9 +88,9 @@ const Beneficiary = () => {
 
           <Grid container spacing={2} justifyContent='center' style={{ marginTop: '20px', paddingBottom: '100px' }}>
             {beneficiaryList.length &&
-              beneficiaryList.map((val, key) => {
+              beneficiaryList.map((val) => {
                 return (
-                  <Grid item xs={12} sm={6} md={4} lg={3} key={key} onClick={() => handleSelect(val)}>
+                  <Grid item xs={12} sm={6} md={4} lg={3} key={val._id} onClick={() => handleSelect(val)}>
                     <BeneficiaryCardDiv>
                       <SingleBeneficiaryCard
                         name={val.name}
@@ -111,4 +111,4 @@ const Beneficiary = () => {
   );
 };
 
-export default Beneficiary;
+

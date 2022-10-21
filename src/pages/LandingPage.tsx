@@ -6,38 +6,38 @@ import Login from './auth/Login';
 import { Grid, Typography } from '@mui/material';
 
 const MainHeaderWrapper = styles.div`
-padding-top: 100px;
-h1{
+  padding-top: 100px;
+  h1 {
     text-align: center;
     padding-bottom:20px;
 }
 `;
 
 const FundButton = styles.button`
-background-color: green;
-color: white;
-padding: 10px;
-border-radius: 7px;
-cursor: pointer;
-border: none;
+  background-color: green;
+  color: white;
+  padding: 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  border: none;
 `;
 
 const DescriptionDiv = styles.div`
-margin-left:20px;
-padding:20px;
-background-color: #d58855;
-color: white;
-padding: 20px;
+  margin-left:20px;
+  padding:20px;
+  background-color: #d58855;
+  color: white;
+  padding: 20px;
 `;
 
 const MainBgDiv = styles.div`
-background-image:url(${bgImage});
-height:100vh;
-background-size:cover;
-background-repeat:no-repeat;
+  background-image:url(${bgImage});
+  height:100vh;
+  background-size:cover;
+  background-repeat:no-repeat;
 `;
 
-const LandingPage = () => {
+export default function LandingPage() {
   return (
     <MainBgDiv>
       <HeaderAndFooterWrapper>
@@ -85,6 +85,4 @@ const LandingPage = () => {
       </HeaderAndFooterWrapper>
     </MainBgDiv>
   );
-};
-
-export default LandingPage;
+}

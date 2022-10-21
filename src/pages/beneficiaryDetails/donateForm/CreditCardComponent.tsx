@@ -11,15 +11,15 @@ export default function CreditCardComponent() {
     cvc: '',
   });
   const handleChange = React.useCallback(
-    (event: any) => {
-      const { name, value } = event.target;
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
       setValues(v => ({ ...v, [name]: value }));
     },
     [setValues],
   );
 
   const [focused, setFocus] = React.useState<any | undefined>(undefined);
-  const handleFocus = React.useCallback((event: any) => setFocus(event.target.name as any), [setFocus]);
+  const handleFocus = React.useCallback((e: any) => setFocus(e.target.name as any), [setFocus]);
   const handleBlur = React.useCallback(() => setFocus(undefined), [setFocus]);
 
   return (

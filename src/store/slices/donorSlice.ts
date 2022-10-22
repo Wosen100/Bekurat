@@ -21,8 +21,12 @@ const initialState: DonorState = {
 };
 
 export const createNewDonor = createAsyncThunk('donor/create', async (donor: Donor) => {
-  const res = await axios.post('/donor/add', donor);
-  return res.data.message.donor;
+  try {
+    const res = await axios.post('/donor/add', donor);
+    return res.data.message.donor;
+  } catch {
+    return null;
+  }
 });
 
 export const DonorSlice = createSlice({
@@ -40,6 +44,9 @@ export const DonorSlice = createSlice({
     });
     builder.addCase(createNewDonor.pending, (state, action) => {
       state.createDonorLoading = 'loading';
+    });
+    builder.addCase(createNewDonor.rejected, (state, action) => {
+      state.createDonorLoading = 'failed';
     });
   },
 });

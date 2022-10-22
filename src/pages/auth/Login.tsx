@@ -58,23 +58,31 @@ export default function Login() {
       password,
     };
 
-    const req = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
+    try {
+      const req = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
 
-    const res = await req.json();
-    if (res.success) {
-      localStorage.setItem('token', res.token);
-      console.log(res);
-      setUser(true);
-    } else {
+      const res = await req.json();
+      if (res.success) {
+        localStorage.setItem('token', res.token);
+        console.log(res);
+        setUser(true);
+      } else {
+        setError({
+          error: true,
+          message: res.message,
+        });
+        return;
+      }
+    } catch {
       setError({
         error: true,
-        message: res.message,
+        message: 'server error',
       });
       return;
     }
@@ -95,6 +103,4 @@ export default function Login() {
       </FormWrapper>
     </div>
   );
-};
-
-
+}

@@ -11,30 +11,46 @@ export const getBeneficiaries = createAsyncThunk('beneficiary/getBeneficiaries',
 export const createBeneficiary = createAsyncThunk('beneficiary/createBeneficiary', async (yourData: any) => {
   let { imageFile, beneficiary } = yourData;
 
-  let imagepath = await uploadImage(imageFile);
+  try {
+    let imagepath = await uploadImage(imageFile);
 
-  const createBeneficiaryResponse = await axios.post('/beneficiary/add', {
-    ...beneficiary,
-    image: imagepath ? imagepath : '',
-  });
-  return createBeneficiaryResponse.data.message.beneficiary;
+    try {
+      const createBeneficiaryResponse = await axios.post('/beneficiary/add', {
+        ...beneficiary,
+        image: imagepath ? imagepath : '',
+      });
+      return createBeneficiaryResponse.data.message.beneficiary;
+    } catch {
+      return null;
+    }
+  } catch {
+    return null;
+  }
 });
 
 export const updateWithDonate = createAsyncThunk('beneficiary/donate', async (params: DonateUpdateType) => {
   let { _id, donation } = params;
-  const beneUpdateRes = await axios.put('/beneficiary/donate', { _id, donation });
-  return beneUpdateRes.data;
+  try {
+    const beneUpdateRes = await axios.put('/beneficiary/donate', { _id, donation });
+    return beneUpdateRes.data;
+  } catch {
+    return null;
+  }
 });
 
 const uploadImage = async (imageFile: any) => {
-  const uploadRes = await axios.post('/beneficiary/upload', imageFile, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
-  if (uploadRes.data.status === 200) {
-    return uploadRes.data.filePath;
-  } else {
+  try {
+    const uploadRes = await axios.post('/beneficiary/upload', imageFile, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    if (uploadRes.data.status === 200) {
+      return uploadRes.data.filePath;
+    } else {
+      return false;
+    }
+  } catch {
     return false;
   }
 };
@@ -85,11 +101,18 @@ export const BeneSlices = createSlice({
       state.createBeneLoading = 'completed';
       state.beneficiaryList = [...state.beneficiaryList, action.payload];
     });
+    builder.addCase(createBeneficiary.rejected, (state, action) => {
+      state.createBeneLoading = 'failed';
+      state.beneficiaryList = [];
+    });
     builder.addCase(updateWithDonate.pending, (state, action) => {
       state.updateBeneLoading = 'loading';
     });
     builder.addCase(updateWithDonate.fulfilled, (state, action) => {
       state.updateBeneLoading = 'completed';
+    });
+    builder.addCase(updateWithDonate.rejected, (state, action) => {
+      state.updateBeneLoading = 'failed';
     });
   },
 });

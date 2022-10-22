@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 interface Donation {
-  beneficiary: string;
-  donor: string;
+  beneficiary: string | undefined;
+  donor: string | undefined;
   donationAmount: number;
 }
 
@@ -17,9 +17,13 @@ const initialState: DonationState = {
   createDonationLoading: 'idle',
 };
 
-export const createDonation = createAsyncThunk('donation/create', async (donation: any) => {
-  const res = await axios.post('/donation/create', donation);
-  return res.data;
+export const createDonation = createAsyncThunk('donation/create', async (donation: Donation) => {
+  try {
+    const res = await axios.post('/donation/create', donation);
+    return res.data;
+  } catch {
+    return null;
+  }
 });
 
 export const DonationSlice = createSlice({

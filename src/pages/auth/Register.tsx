@@ -60,8 +60,7 @@ export default function Register() {
   const [password2, setPassword2] = useState('');
   const [user, setUser] = useState(false);
 
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.getItem('token') && setUser(true);
@@ -96,26 +95,33 @@ export default function Register() {
         password,
       };
 
-      const req = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
-      });
-
-      const res = await req.json();
-      if (res.success) {
-        setError({
-          error: false,
-          message: res.message,
+      try {
+        const req = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(user),
         });
 
-        navigate('/beneficiaries');
-      } else {
+        const res = await req.json();
+        if (res.success) {
+          setError({
+            error: false,
+            message: res.message,
+          });
+
+          navigate('/beneficiaries');
+        } else {
+          setError({
+            error: true,
+            message: res.message,
+          });
+        }
+      } catch {
         setError({
           error: true,
-          message: res.message,
+          message: 'Sometihing wrong with the server',
         });
       }
     } else {
@@ -204,9 +210,9 @@ export default function Register() {
                   </Grid>
                   <Grid item sx={{ pt: 1 }}>
                     <button>Submit</button>
-                    <br />
-                    <br />
-                    {error.error && <label style={{ color: 'red' }}>{error.message}</label>}
+                    <Typography sx={{ pt: 2 }}>
+                      {error.error && <label style={{ color: 'red' }}>{error.message}</label>}
+                    </Typography>
                   </Grid>
                 </form>
               </div>
@@ -217,6 +223,4 @@ export default function Register() {
       </MainInnerDiv>
     </MainBgDiv>
   );
-};
-
-
+}

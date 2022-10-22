@@ -20,6 +20,8 @@ const FundButton = styles.button`
   border-radius: 7px;
   cursor: pointer;
   border: none;
+  margin-left:20px;
+  margin-top:20px;
 `;
 
 const DescriptionDiv = styles.div`
@@ -56,17 +58,16 @@ export default function LandingPage() {
           </Grid>
           <Grid item xs={6} sm={6}>
             <DescriptionDiv>
+              <Typography sx={{fontWeight:'bold'}}> How to use Asrat-Bekruat?</Typography>
               <Typography sx={{ pb: 2 }}>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. In, rem minima. Earum asperiores incidunt
-                pariatur maxime, delectus magnam veniam unde error quia officiis hic cupiditate voluptates. Nihil
-                perspiciatis explicabo neque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate quam
-                nesciunt dicta impedit, saepe eveniet provident necessitatibus error laboriosam corrupti nihil quod
-                molestias neque, enim hic perspiciatis in! Molestias, sed!
+                You will no longer have difficulty donating to your favorite church! This app is prepared to solve that problem and improve the donors and the beneficiary
+                connnection from overseas. You can use this app two ways, as a donor; select your favorite church by clicking the "beneficiary" button and donate to their cause.  The other way is to register your church so that other donors can easily find it and donate.
+                With this app we build a bridge to connect the two parties easily; i.e donor and beneficiary!  Good Luck!
               </Typography>
-              <NavLink to='/beneficiaries' style={{ textDecoration: 'none', cursor: 'pointer' }}>
-                <FundButton>Start Your Fundrasing Here!</FundButton>{' '}
-              </NavLink>
             </DescriptionDiv>
+            <NavLink to='/beneficiaries' style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                <FundButton>Start Your Fundrasing Here! <br /> እርዳታ ማሰባሰብ ይህን ተጭነው ይጀምሩ </FundButton>{' '}
+              </NavLink>
           </Grid>
           <Grid item xs={6} sm={6}>
             <Grid container justifyContent={'center'} flexDirection='column' alignItems={'center'}>

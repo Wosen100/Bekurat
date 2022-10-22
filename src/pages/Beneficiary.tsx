@@ -75,7 +75,7 @@ export default function Beneficiary() {
             </Grid>
             <Grid item xs={2}>
               <FullScreenDialogCustom
-                handleClick={() => { }}
+                handleClick={() => {}}
                 open={open}
                 setOpen={handleOpen}
                 title='Register New Beneficiary'
@@ -88,17 +88,18 @@ export default function Beneficiary() {
 
           <Grid container spacing={2} justifyContent='center' style={{ marginTop: '20px', paddingBottom: '100px' }}>
             {beneficiaryList.length &&
-              beneficiaryList.map((val) => {
+              beneficiaryList.map(val => {
+                const { name, description, address, image, curren_donation, donation_goal } = val;
                 return (
                   <Grid item xs={12} sm={6} md={4} lg={3} key={val._id} onClick={() => handleSelect(val)}>
                     <BeneficiaryCardDiv>
                       <SingleBeneficiaryCard
-                        name={val.name}
-                        reason={val.description}
-                        address={val.address}
-                        image={val.image}
-                        currentDonation={val.curren_donation}
-                        donationGoal={val.donation_goal}
+                        name={name}
+                        reason={description}
+                        address={address}
+                        image={image}
+                        currentDonation={curren_donation}
+                        donationGoal={donation_goal}
                       />
                     </BeneficiaryCardDiv>
                   </Grid>
@@ -109,6 +110,4 @@ export default function Beneficiary() {
       </MainInnerDiv>
     </MainBgDiv>
   );
-};
-
-
+}

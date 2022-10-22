@@ -28,9 +28,8 @@ export default function DonateValueComponent({
           <Typography>
             You're supporing <b>{name}</b>{' '}
           </Typography>
-          <br />
-          <Typography style={{ fontSize: '12px', color: 'grey' }}>
-            <i>Your donation will be in support of Kia Slade</i>
+          <Typography style={{ fontSize: '12px', color: 'grey', fontStyle: 'italic' }}>
+            Your donation will be in support of Kia Slade
           </Typography>
         </Grid>
       </Grid>
@@ -69,11 +68,11 @@ export default function DonateValueComponent({
           />
         </div>
       </Grid>
-      <br />
-      <Typography style={{ color: 'grey' }}>
+
+      <Typography sx={{ mt: 2, mb: 1 }} style={{ color: 'grey' }}>
         We guarantee you a full refund for up to a year in the rare event that fraud occurs.
       </Typography>
-      <br />
+
       {!isContinue && (
         <Button
           disabled={!isEnabled}

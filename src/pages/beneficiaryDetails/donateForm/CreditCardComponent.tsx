@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FocusEvent } from 'react';
 import ReactCreditCard from '@repay/react-credit-card';
 import '@repay/react-credit-card/dist/react-credit-card.css';
 import { Typography } from '@mui/material';
@@ -19,14 +19,16 @@ export default function CreditCardComponent() {
   );
 
   const [focused, setFocus] = React.useState<any | undefined>(undefined);
-  const handleFocus = React.useCallback((e: any) => setFocus(e.target.name as any), [setFocus]);
+  const handleFocus = React.useCallback(
+    (e: FocusEvent<HTMLInputElement>) => setFocus(e.target.name as string),
+    [setFocus],
+  );
   const handleBlur = React.useCallback(() => setFocus(undefined), [setFocus]);
 
   return (
     <form>
       <div>
-        <Typography sx={{ fontWeight: 'bold' }}>Credit or debit</Typography>
-        <br />
+        <Typography sx={{ fontWeight: 'bold', mb: 2 }}>Credit or debit</Typography>
         <fieldset
           style={{
             border: 'none',

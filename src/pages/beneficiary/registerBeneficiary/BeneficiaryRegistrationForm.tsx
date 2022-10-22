@@ -58,10 +58,11 @@ export default function BeneficiaryRegistrationForm({ setOpen }: RegisterBenefic
           <Typography variant='h4' style={{ fontWeight: 'bold' }}>
             Please register with your details
           </Typography>
-          <br />
-          <Typography variant='h5'>You may find millions of donors who love that keeps you alive.</Typography>
+          <Typography variant='h5' sx={{ pt: 2 }}>
+            You may find millions of donors who love that keeps you alive.
+          </Typography>
           <div style={{ paddingTop: '20px' }}>
-            {formFields.map((val) =>
+            {formFields.map(val =>
               val.type === 'longText' ? (
                 <div key={val.name} style={{ paddingBottom: '5px' }}>
                   <StyledTextField
@@ -92,8 +93,8 @@ export default function BeneficiaryRegistrationForm({ setOpen }: RegisterBenefic
                 </div>
               ),
             )}
-            <br />
-            <Typography> Please select the profile image</Typography>
+
+            <Typography sx={{ pt: 2 }}> Please select the profile image</Typography>
             <input
               type='file'
               name='image'

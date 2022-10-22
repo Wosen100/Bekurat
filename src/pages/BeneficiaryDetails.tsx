@@ -34,6 +34,10 @@ const DonateCardWrapper = styles.div`
 marginTop:10px;
 `;
 
+const BaneDetailsWrapper = styles.div`
+  padding:60px 100px
+`;
+
 export default function BeneficiaryDetails() {
   const selectedBeneficiary = useSelector((state: RootState) => state.bene.selectedBeneficiary);
 
@@ -43,17 +47,15 @@ export default function BeneficiaryDetails() {
     <MainBgDiv>
       <MainInnerDiv>
         <HeaderAndFooterWrapper>
-          <div style={{ padding: '60px 100px' }}>
+          <BaneDetailsWrapper>
             <Grid container>
               <Grid item xs={12}>
                 <Typography style={{ fontWeight: 'bold', color: 'white' }} variant={'h4'}>
                   {name}
                 </Typography>
               </Grid>
-
               <Grid item xs={12} sm={6}>
                 <img src={image} style={{ width: '100%', marginTop: '10px' }} alt={name} />
-
                 <DescriptionDiv>
                   <Typography>{description}</Typography>
                 </DescriptionDiv>
@@ -64,7 +66,7 @@ export default function BeneficiaryDetails() {
                 </DonateCardWrapper>
               </Grid>
             </Grid>
-          </div>
+          </BaneDetailsWrapper>
         </HeaderAndFooterWrapper>
       </MainInnerDiv>
     </MainBgDiv>

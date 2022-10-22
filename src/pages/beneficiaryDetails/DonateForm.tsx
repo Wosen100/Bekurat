@@ -7,6 +7,19 @@ import { createDonation } from '../../store/slices/donationSlice';
 import CreditCardComponent from './donateForm/CreditCardComponent';
 import DonateValueComponent from './donateForm/DonateValueComponent';
 import DonerInformationForm from './donateForm/DonerInformationForm';
+import styles from 'styled-components';
+
+const MainWrapper = styles.div`
+margin:0px 5%
+`;
+
+const YourInfoWrapper = styles.div`
+margin-bottom:16px
+`;
+
+const SpacerDiv = styles.div`
+margin-bottom:150px
+`;
 
 export interface DonateUpdateType {
   _id: string | undefined;
@@ -41,7 +54,7 @@ export default function DonateForm() {
   };
 
   return (
-    <div style={{ margin: '0px 5%' }}>
+    <MainWrapper>
       <Grid sx={{ pt: 10 }} container justifyContent={'center'}>
         <Grid item container xs={6}>
           <Card sx={{ p: 3 }}>
@@ -56,15 +69,15 @@ export default function DonateForm() {
             {isContinue && (
               <div>
                 <hr />
-                <Typography sx={{ pt: 2, fontWeight: 'bold' }}>Your information</Typography>
-                <DonerInformationForm isContinue={isContinue2} setIsConinue={setIsConinue2} />
-                <br />
+                <YourInfoWrapper>
+                  <Typography sx={{ pt: 2, fontWeight: 'bold' }}>Your information</Typography>
+                  <DonerInformationForm isContinue={isContinue2} setIsConinue={setIsConinue2} />
+                </YourInfoWrapper>
                 {isContinue2 && (
                   <div>
                     <CreditCardComponent />
-                    <br />
-                    <br />
                     <Button
+                      sx={{ mt: 3 }}
                       onClick={handleDonate}
                       variant='contained'
                       style={{
@@ -87,7 +100,7 @@ export default function DonateForm() {
           </Card>
         </Grid>
       </Grid>
-      <div style={{ marginBottom: '150px' }}></div>
-    </div>
+      <SpacerDiv />
+    </MainWrapper>
   );
 }

@@ -37,6 +37,10 @@ const MainBgDiv = styles.div`
   background-repeat:no-repeat;
 `;
 
+const SignUpSpan = styles.span`
+  margin-top:10px;
+`;
+
 export default function LandingPage() {
   return (
     <MainBgDiv>
@@ -50,35 +54,29 @@ export default function LandingPage() {
               </h1>
             </MainHeaderWrapper>
           </Grid>
-
           <Grid item xs={6} sm={6}>
             <DescriptionDiv>
-              <Typography>
+              <Typography sx={{ pb: 2 }}>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. In, rem minima. Earum asperiores incidunt
                 pariatur maxime, delectus magnam veniam unde error quia officiis hic cupiditate voluptates. Nihil
                 perspiciatis explicabo neque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate quam
                 nesciunt dicta impedit, saepe eveniet provident necessitatibus error laboriosam corrupti nihil quod
                 molestias neque, enim hic perspiciatis in! Molestias, sed!
               </Typography>
-              <br />
               <NavLink to='/beneficiaries' style={{ textDecoration: 'none', cursor: 'pointer' }}>
                 <FundButton>Start Your Fundrasing Here!</FundButton>{' '}
               </NavLink>
             </DescriptionDiv>
           </Grid>
-
           <Grid item xs={6} sm={6}>
             <Grid container justifyContent={'center'} flexDirection='column' alignItems={'center'}>
               <Login />
-              <br />
-              <span>
-                {' '}
+              <SignUpSpan>
                 Don't have and account?{' '}
                 <Link to='/signup'>
-                  {' '}
                   Sign Up <br /> አካውንት ከሌለዎት፤ እዚህ ጋር ተጭነው አካውንት ይፍጠሩ::{' '}
                 </Link>
-              </span>
+              </SignUpSpan>
             </Grid>
           </Grid>
         </Grid>

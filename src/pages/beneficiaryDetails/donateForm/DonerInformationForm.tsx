@@ -11,6 +11,11 @@ padding: 20px;
 border-radius: 20px;
 `;
 
+const ButtonWrapper = styles.div`
+  padding-top:10px;
+  padding-bottom:10px;
+`;
+
 const formFields = [
   { label: 'First Name', name: 'fName', type: 'text' },
   { label: 'Last Name', name: 'lName', type: 'text' },
@@ -59,20 +64,20 @@ export default function DonerInformationForm({ isContinue, setIsConinue }: Doner
 
   return (
     <OuterDiv>
-      <br />
-
-      {formFields.map(val => (
-        <div key={val.name} style={{ paddingBottom: '5px' }}>
-          <TextField fullWidth label={val.label} name={val.name} onChange={handleChange} />
-        </div>
-      ))}
+      <ButtonWrapper>
+        {formFields.map(val => (
+          <div key={val.name} style={{ paddingBottom: '5px' }}>
+            <TextField fullWidth label={val.label} name={val.name} onChange={handleChange} />
+          </div>
+        ))}
+      </ButtonWrapper>
       <CountryDropdown value={country} onChange={value => setCountry(value)} />
 
       {!isContinue && (
-        <div>
-          <br />
+        <ButtonWrapper>
           {isLoading === 'idle' ? (
             <Button
+              sx={{ mt: 2 }}
               onClick={handleSubmitData}
               variant='contained'
               style={{
@@ -85,8 +90,7 @@ export default function DonerInformationForm({ isContinue, setIsConinue }: Doner
           ) : (
             'Loading....'
           )}
-          <br />
-        </div>
+        </ButtonWrapper>
       )}
     </OuterDiv>
   );

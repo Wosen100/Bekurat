@@ -1,5 +1,5 @@
 import { Button, Card, Grid, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import { updateWithDonate } from '../../store/slices/beneficiarySlice';
@@ -33,10 +33,10 @@ export default function DonateForm() {
   const donor = useSelector((state: RootState) => state.donor.newDonor);
 
   const { name, image } = selectedBeneficiary!;
-  const [isContinue, setIsConinue] = React.useState(false);
-  const [isContinue2, setIsConinue2] = React.useState(false);
+  const [isContinue, setIsConinue] = useState(false);
+  const [isContinue2, setIsConinue2] = useState(false);
 
-  const [donateValue, setDonateValue] = React.useState(0);
+  const [donateValue, setDonateValue] = useState(0);
 
   const handleContinue = () => {
     setIsConinue(true);

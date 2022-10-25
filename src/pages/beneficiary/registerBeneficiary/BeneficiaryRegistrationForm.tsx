@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useState, ChangeEvent } from 'react';
 import { TextField, Typography, Button, Grid } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { createBeneficiary } from '../../../store/slices/beneficiarySlice';
@@ -25,13 +25,13 @@ interface RegisterBeneficiaryProps {
 }
 
 export default function BeneficiaryRegistrationForm({ setOpen }: RegisterBeneficiaryProps) {
-  const [beneficiaryObj, setBeneficiaryObj] = React.useState({ image: '' });
+  const [beneficiaryObj, setBeneficiaryObj] = useState({ image: '' });
 
-  const [imageFile, setImageFile] = React.useState<any>();
+  const [imageFile, setImageFile] = useState<any>();
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setBeneficiaryObj({
       ...beneficiaryObj,
       [e.target.name]: e.target.value,

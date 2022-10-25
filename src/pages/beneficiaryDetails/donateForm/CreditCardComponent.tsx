@@ -1,29 +1,29 @@
-import React, { FocusEvent } from 'react';
+import React, { FocusEvent, useState, ChangeEvent,useCallback } from 'react';
 import ReactCreditCard from '@repay/react-credit-card';
 import '@repay/react-credit-card/dist/react-credit-card.css';
 import { Typography } from '@mui/material';
 
 export default function CreditCardComponent() {
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     name: '',
     number: '',
     expiration: '',
     cvc: '',
   });
-  const handleChange = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       setValues(v => ({ ...v, [name]: value }));
     },
     [setValues],
   );
 
-  const [focused, setFocus] = React.useState<any | undefined>(undefined);
-  const handleFocus = React.useCallback(
+  const [focused, setFocus] = useState<any | undefined>(undefined);
+  const handleFocus = useCallback(
     (e: FocusEvent<HTMLInputElement>) => setFocus(e.target.name as string),
     [setFocus],
   );
-  const handleBlur = React.useCallback(() => setFocus(undefined), [setFocus]);
+  const handleBlur = useCallback(() => setFocus(undefined), [setFocus]);
 
   return (
     <form>

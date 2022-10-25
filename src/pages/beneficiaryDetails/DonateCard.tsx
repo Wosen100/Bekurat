@@ -1,5 +1,5 @@
 import { Button, Card, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import styles from 'styled-components';
@@ -27,7 +27,7 @@ font-weight: normal;
 `;
 
 export default function DonateCard({ currentDonation, donationGoal, title }: DonateCardProps) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
 

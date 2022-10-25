@@ -1,3 +1,4 @@
+import { FormEvent} from 'react'
 import { Grid, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
@@ -71,7 +72,7 @@ export default function Register() {
     message: '',
   });
 
-  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (firstName.length && lastName.length && email.length && password.length && password2.length) {

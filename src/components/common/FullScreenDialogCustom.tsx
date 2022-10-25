@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { ReactElement, Ref,forwardRef } from 'react';
 import Dialog from '@mui/material/Dialog';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,18 +11,18 @@ import { TransitionProps } from '@mui/material/transitions';
 
 interface FullScreenDialogProps {
   title: string;
-  children: React.ReactElement;
-  mainLayout: React.ReactElement;
+  children: ReactElement;
+  mainLayout: ReactElement;
   open: boolean;
   setOpen: Function;
   handleClick: Function;
 }
 
-const Transition = React.forwardRef(function Transition(
+const Transition = forwardRef(function Transition(
   props: TransitionProps & {
-    children: React.ReactElement;
+    children: ReactElement;
   },
-  ref: React.Ref<unknown>,
+  ref: Ref<unknown>,
 ) {
   return <Slide direction='up' ref={ref} {...props} />;
 });

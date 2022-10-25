@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import styles from 'styled-components';
 import { Grid, Typography, Button } from '@mui/material';
 import HeaderAndFooterWrapper from '../components/HeaderAndFooterWrapper';
@@ -46,7 +46,7 @@ margin: 10px;
 
 export default function Beneficiary() {
   const navigate = useNavigate();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const beneficiaryList = useSelector((state: RootState) => state.bene.beneficiaryList);
 
@@ -55,7 +55,7 @@ export default function Beneficiary() {
     dispatch(clearBeneLoading({}));
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(getBeneficiaries());
   }, [dispatch]);
 

@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const mongoURl ='mongodb+srv://wosen:wosen1122@cluster0.pszmqa3.mongodb.net/?retryWrites=true&w=majority'
+const mongoURl =process.env.DB_URL;
 
 const connectDB = async () => {
   try {

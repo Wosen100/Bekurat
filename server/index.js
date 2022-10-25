@@ -17,7 +17,7 @@ serverApp.use(bodyParser.urlencoded({ extended: true }));
 serverApp.use(express.static("uploads"));
 serverApp.use(express.static("public"));
 
-dotenv.config({ path: "./config/config.env" });
+dotenv.config({ path: ".env" });
 const connectDB = require("./config/db.js");
 const uploadRouter = require("./routes/uploadFile");
 const donorRoute = require("./routes/donor");

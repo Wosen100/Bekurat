@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, useState, useEffect} from 'react';
 import { TextField, Button } from '@mui/material';
 import styles from 'styled-components';
 import { CountryDropdown } from 'react-country-region-selector';
@@ -40,12 +40,12 @@ interface DonerInfoProp {
 export default function DonerInformationForm({ isContinue, setIsConinue }: DonerInfoProp) {
   const isLoading = useSelector((state: RootState) => state.donor.createDonorLoading);
 
-  const [donerObj, setDonerObj] = React.useState({});
-  const [country, setCountry] = React.useState('');
+  const [donerObj, setDonerObj] = useState({});
+  const [country, setCountry] = useState('');
 
   const dispath = useDispatch<AppDispatch>();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDonerObj({
       ...donerObj,
       [e.target.name]: e.target.value,
@@ -56,7 +56,7 @@ export default function DonerInformationForm({ isContinue, setIsConinue }: Doner
     dispath(createNewDonor({ ...donerObj, country: country } as Donor));
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isLoading === 'completed') {
       setIsConinue(true);
     }

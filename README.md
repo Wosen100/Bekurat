@@ -27,18 +27,10 @@ React Redux
 Axios
 React Router
 JWT Authentication
-Bcrypt
 Mongoose
 MongoDB
 EsLint and AirBnb
 json server
-
-
-
-
-
-
-
 
 
 

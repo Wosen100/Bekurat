@@ -1,5 +1,6 @@
-import CreditCardComponent from './CreditCardComponent';
+import React from 'react';
 import { screen, render } from '@testing-library/react';
+import CreditCardComponent from './CreditCardComponent';
 
 describe('Input box', () => {
   it('Donation values must be with currency value', () => {

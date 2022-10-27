@@ -59,10 +59,9 @@ export default function BeneficiaryRegistrationForm({
         }
       }
       return true;
-    } else {
-      setError('Plese fill out all the fields');
-      return false;
     }
+    setError('Plese fill out all the fields');
+    return false;
   };
 
   const handleSubmit = () => {

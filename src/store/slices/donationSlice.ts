@@ -49,6 +49,7 @@ export const DonationSlice = createSlice({
         state.createDonationLoading = 'completed';
       },
     );
+
     builder.addCase(createDonation.pending, (state) => {
       state.createDonationLoading = 'loading';
     });

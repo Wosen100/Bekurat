@@ -24,7 +24,6 @@ A few of the frameworks/libraries that were used to build the project are:
 - Axios
 - React Router
 - JWT Authentication
-- Bcrypt
 - Mongoose
 - MongoDB
 - EsLint

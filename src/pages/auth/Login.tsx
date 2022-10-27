@@ -70,7 +70,7 @@ export default function Login() {
       const res = await req.json();
       if (res.success) {
         localStorage.setItem('token', res.token);
-        console.log(res);
+
         setUser(true);
       } else {
         setError({

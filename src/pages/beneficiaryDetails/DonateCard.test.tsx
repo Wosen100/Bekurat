@@ -1,6 +1,7 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
-import DonateCard from './DonateCard';
 import { Provider } from 'react-redux';
+import DonateCard from './DonateCard';
 import store from '../../store';
 
 describe('Donation values', () => {

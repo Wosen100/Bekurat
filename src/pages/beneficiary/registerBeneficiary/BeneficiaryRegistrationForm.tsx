@@ -31,9 +31,10 @@ interface RegisterBeneficiaryProps {
 export default function BeneficiaryRegistrationForm({
   setOpen,
 }: RegisterBeneficiaryProps) {
-  const [beneficiaryObj, setBeneficiaryObj] = useState({ image: '' });
+  const [beneficiaryObj, setBeneficiaryObj] = useState({});
 
   const [imageFile, setImageFile] = useState<any>();
+  const [error, setError] = React.useState('');
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -45,21 +46,36 @@ export default function BeneficiaryRegistrationForm({
   };
 
   const handleFileUpload = (element: HTMLInputElement) => {
-    console.log(element.files);
     if (element.files) {
       setImageFile(element.files[0]);
     }
   };
 
-  const handleUpload = () => {
+  const checkObjectValue = (myObj: any) => {
+    if (Object.keys(myObj).length === 5) {
+      for (const key in myObj) {
+        if (myObj[key].length === 0) {
+          return false;
+        }
+      }
+      return true;
+    } else {
+      setError('Plese fill out all the fields');
+      return false;
+    }
+  };
+
+  const handleSubmit = () => {
     const formData = new FormData();
     formData.append('uploadFile', imageFile);
-    dispatch(
-      createBeneficiary({
-        imageFile: formData,
-        beneficiary: beneficiaryObj,
-      }),
-    );
+    if (checkObjectValue(beneficiaryObj) && imageFile) {
+      dispatch(
+        createBeneficiary({
+          imageFile: formData,
+          beneficiary: beneficiaryObj,
+        }),
+      );
+    }
   };
 
   return (
@@ -123,12 +139,27 @@ export default function BeneficiaryRegistrationForm({
               }
             />
             <Grid sx={{ pt: 4 }} justifyContent="flex-end" container>
+              <Grid item xs={12}>
+                {error && (
+                  <Typography
+                    style={{
+                      color: 'white',
+                      background: 'red',
+                      display: 'initial',
+                      padding: '7px',
+                      borderRadius: '2px',
+                    }}
+                  >
+                    {error}
+                  </Typography>
+                )}
+              </Grid>
               <Button onClick={() => setOpen(false)} color="primary">
                 Cancel
               </Button>
               <div style={{ width: '20px' }} />
               <Button
-                onClick={handleUpload}
+                onClick={handleSubmit}
                 style={{ backgroundColor: 'green' }}
                 variant="contained"
               >

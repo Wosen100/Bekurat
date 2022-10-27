@@ -28,7 +28,7 @@ uploadRouter.route("/upload").post(upload.single("uploadFile"), (req, res) => {
 
   res.send({
     status: 200,
-    filePath: filePath.replace(/\\/g,"/").replace("uploads/", "http://localhost:5001/"),
+    filePath: filePath.replace("uploads/", "http://localhost:5001/"),
   });
 });
 

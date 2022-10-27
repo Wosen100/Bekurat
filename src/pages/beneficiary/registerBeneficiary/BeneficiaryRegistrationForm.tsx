@@ -1,9 +1,9 @@
 import React, { SyntheticEvent, useState, ChangeEvent } from 'react';
 import { TextField, Typography, Button, Grid } from '@mui/material';
+import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { createBeneficiary } from '../../../store/slices/beneficiarySlice';
 import { AppDispatch } from '../../../store';
-import styled from 'styled-components';
 
 const StyledTextField = styled(TextField)`
   .MuiInputBase-root {
@@ -17,14 +17,20 @@ const formFields = [
   { label: 'Address', name: 'address', type: 'longText' },
   { label: 'Short Description', name: 'description', type: 'text' },
   { label: 'Donation Goal', name: 'goal', type: 'number' },
-  { label: 'Long Description', name: 'longDescription', type: 'longText' },
+  {
+    label: 'Long Description',
+    name: 'longDescription',
+    type: 'longText',
+  },
 ];
 
 interface RegisterBeneficiaryProps {
-  setOpen: Function;
+  setOpen: (a: boolean) => void;
 }
 
-export default function BeneficiaryRegistrationForm({ setOpen }: RegisterBeneficiaryProps) {
+export default function BeneficiaryRegistrationForm({
+  setOpen,
+}: RegisterBeneficiaryProps) {
   const [beneficiaryObj, setBeneficiaryObj] = useState({ image: '' });
 
   const [imageFile, setImageFile] = useState<any>();
@@ -46,23 +52,34 @@ export default function BeneficiaryRegistrationForm({ setOpen }: RegisterBenefic
   };
 
   const handleUpload = () => {
-    var formData = new FormData();
+    const formData = new FormData();
     formData.append('uploadFile', imageFile);
-    dispatch(createBeneficiary({ imageFile: formData, beneficiary: beneficiaryObj }));
+    dispatch(
+      createBeneficiary({
+        imageFile: formData,
+        beneficiary: beneficiaryObj,
+      }),
+    );
   };
 
   return (
     <div>
-      <Grid container justifyContent={'center'} alignContent='center' alignItems={'center'}>
+      <Grid
+        container
+        justifyContent="center"
+        alignContent="center"
+        alignItems="center"
+      >
         <Grid item>
-          <Typography variant='h4' style={{ fontWeight: 'bold' }}>
+          <Typography variant="h4" style={{ fontWeight: 'bold' }}>
             Please register with your details
           </Typography>
-          <Typography variant='h5' sx={{ pt: 2 }}>
-            You may find millions of donors who love that keeps you alive.
+          <Typography variant="h5" sx={{ pt: 2 }}>
+            You may find millions of donors who love that keeps you
+            alive.
           </Typography>
           <div style={{ paddingTop: '20px' }}>
-            {formFields.map(val =>
+            {formFields.map((val) =>
               val.type === 'longText' ? (
                 <div key={val.name} style={{ paddingBottom: '5px' }}>
                   <StyledTextField
@@ -94,18 +111,27 @@ export default function BeneficiaryRegistrationForm({ setOpen }: RegisterBenefic
               ),
             )}
 
-            <Typography sx={{ pt: 2 }}> Please select the profile image</Typography>
+            <Typography sx={{ pt: 2 }}>
+              {' '}
+              Please select the profile image
+            </Typography>
             <input
-              type='file'
-              name='image'
-              onChange={(e: SyntheticEvent) => handleFileUpload(e.currentTarget as HTMLInputElement)}
+              type="file"
+              name="image"
+              onChange={(e: SyntheticEvent) =>
+                handleFileUpload(e.currentTarget as HTMLInputElement)
+              }
             />
-            <Grid sx={{ pt: 4 }} justifyContent={'flex-end'} container>
-              <Button onClick={() => setOpen(false)} color='primary'>
+            <Grid sx={{ pt: 4 }} justifyContent="flex-end" container>
+              <Button onClick={() => setOpen(false)} color="primary">
                 Cancel
               </Button>
-              <div style={{ width: '20px' }}></div>
-              <Button onClick={handleUpload} style={{ backgroundColor: 'green' }} variant='contained'>
+              <div style={{ width: '20px' }} />
+              <Button
+                onClick={handleUpload}
+                style={{ backgroundColor: 'green' }}
+                variant="contained"
+              >
                 Submit
               </Button>
             </Grid>

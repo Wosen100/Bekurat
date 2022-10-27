@@ -1,56 +1,54 @@
-import { FormEvent} from 'react'
+import React, { FormEvent, useEffect, useState } from 'react';
 import { Grid, TextField, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import bgImage from '../../images/candel.jpg';
-import styles from 'styled-components';
 
-const StyledTextField = styles(TextField)`
+const StyledTextField = styled(TextField)`
   .MuiInputBase-root {
     background-color: #d58855;
     color: white;
   }
 `;
 
-const MainBgDiv = styles.div`
-  background-image:url(${bgImage});
-  width:100vw;
-  height:100vh;
-  position:fixed;
-  background-size:cover;
-  background-repeat:no-repeat;
+const MainBgDiv = styled.div`
+  background-image: url(${bgImage});
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
 `;
 
-const MainInnerDiv = styles.div`
-  position:absolute;
-  width:100vw;
-  overflow:scroll;
-  height:100%;
+const MainInnerDiv = styled.div`
+  position: absolute;
+  width: 100vw;
+  overflow: scroll;
+  height: 100%;
 `;
 
-const SignUpSectionWrapper = styles.div`
-margin-left: auto;
-margin-right: auto;
-display: flex;
-align-items: center;
-flex-direction: column;
-margin-top: 20px;
-padding: 20px;
-border-radius: 20px;
-h1{
-  color:white;
-  font-size:40px;
-}
-button{
-  cursor: pointer;
-  background-color: green;
-  color: white;
-  padding: 10px;
-  width: 100px;
-  border: none;
-  border-radius: 7px;
-}
-
+const SignUpSectionWrapper = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  h1 {
+    color: white;
+    font-size: 40px;
+  }
+  button {
+    cursor: pointer;
+    background-color: green;
+    color: white;
+    padding: 10px;
+    width: 100px;
+    border: none;
+    border-radius: 7px;
+  }
 `;
 
 export default function Register() {
@@ -64,7 +62,7 @@ export default function Register() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.getItem('token') && setUser(true);
+    if (localStorage.getItem('token')) setUser(true);
   }, []);
 
   const [error, setError] = useState({
@@ -75,13 +73,18 @@ export default function Register() {
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (firstName.length && lastName.length && email.length && password.length && password2.length) {
+    if (
+      firstName.length &&
+      lastName.length &&
+      email.length &&
+      password.length &&
+      password2.length
+    ) {
       if (password !== password2) {
         setError({
           error: true,
           message: 'Both passwords should match',
         });
-        return;
       } else {
         setError({
           error: false,
@@ -89,7 +92,7 @@ export default function Register() {
         });
       }
 
-      const user = {
+      const userObj = {
         firstName,
         lastName,
         email,
@@ -102,7 +105,7 @@ export default function Register() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(user),
+          body: JSON.stringify(userObj),
         });
 
         const res = await req.json();
@@ -135,21 +138,24 @@ export default function Register() {
   return (
     <MainBgDiv>
       <MainInnerDiv>
-        {user && <Navigate to='/beneficiaries' replace={true} />}
+        {user && <Navigate to="/beneficiaries" replace />}
         <Grid container>
-          <Grid item xs={1} sm={2} md={3} lg={4}></Grid>
+          <Grid item xs={1} sm={2} md={3} lg={4} />
           <Grid item xs={10} sm={8} md={6} lg={4}>
             <SignUpSectionWrapper>
               <h1>Sign Up</h1>
-              <div className='form-container'>
+              <div className="form-container">
                 <form onSubmit={submitHandler}>
                   <Grid container spacing={1}>
                     <Grid item xs={12}>
                       <div>
                         <Typography style={{ color: 'white' }}>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore assumenda ipsam dicta sit
-                          perspiciatis dolorem nobis quia dolores, ratione aut! Cumque perspiciatis nesciunt inventore
-                          officia molestiae dignissimos nulla iste quam.
+                          Lorem ipsum dolor sit amet consectetur
+                          adipisicing elit. Tempore assumenda ipsam
+                          dicta sit perspiciatis dolorem nobis quia
+                          dolores, ratione aut! Cumque perspiciatis
+                          nesciunt inventore officia molestiae
+                          dignissimos nulla iste quam.
                         </Typography>
                       </div>
                     </Grid>
@@ -159,9 +165,9 @@ export default function Register() {
                           style: { color: '#fff' },
                         }}
                         fullWidth
-                        type='text'
-                        onChange={e => setFirstName(e.target.value)}
-                        label='First Name'
+                        type="text"
+                        onChange={(e) => setFirstName(e.target.value)}
+                        label="First Name"
                       />
                     </Grid>
                     <Grid item xs={6}>
@@ -170,9 +176,9 @@ export default function Register() {
                           style: { color: '#fff' },
                         }}
                         fullWidth
-                        type='text'
-                        onChange={e => setLastName(e.target.value)}
-                        label='Last Name'
+                        type="text"
+                        onChange={(e) => setLastName(e.target.value)}
+                        label="Last Name"
                       />
                     </Grid>
                   </Grid>
@@ -181,10 +187,10 @@ export default function Register() {
                       InputLabelProps={{
                         style: { color: '#fff' },
                       }}
-                      type='email'
+                      type="email"
                       fullWidth
-                      onChange={e => setEmail(e.target.value)}
-                      label='Email'
+                      onChange={(e) => setEmail(e.target.value)}
+                      label="Email"
                     />
                   </Grid>
                   <Grid item sx={{ pt: 1 }}>
@@ -192,10 +198,10 @@ export default function Register() {
                       InputLabelProps={{
                         style: { color: '#fff' },
                       }}
-                      type='password'
+                      type="password"
                       fullWidth
-                      onChange={e => setPassword(e.target.value)}
-                      label='Password'
+                      onChange={(e) => setPassword(e.target.value)}
+                      label="Password"
                     />
                   </Grid>
                   <Grid item sx={{ pt: 1 }}>
@@ -204,22 +210,26 @@ export default function Register() {
                         style: { color: '#fff' },
                       }}
                       fullWidth
-                      type='password'
-                      onChange={e => setPassword2(e.target.value)}
-                      label='Re Enter Password'
+                      type="password"
+                      onChange={(e) => setPassword2(e.target.value)}
+                      label="Re Enter Password"
                     />
                   </Grid>
                   <Grid item sx={{ pt: 1 }}>
-                    <button>Submit</button>
+                    <button type="submit"> Submit</button>
                     <Typography sx={{ pt: 2 }}>
-                      {error.error && <label style={{ color: 'red' }}>{error.message}</label>}
+                      {error.error && (
+                        <span style={{ color: 'red' }}>
+                          {error.message}
+                        </span>
+                      )}
                     </Typography>
                   </Grid>
                 </form>
               </div>
             </SignUpSectionWrapper>
           </Grid>
-          <Grid item xs={1} sm={2} md={3} lg={4}></Grid>
+          <Grid item xs={1} sm={2} md={3} lg={4} />
         </Grid>
       </MainInnerDiv>
     </MainBgDiv>

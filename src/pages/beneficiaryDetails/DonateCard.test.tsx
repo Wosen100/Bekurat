@@ -7,9 +7,11 @@ describe('Donation values', () => {
   it('Donation values must be with currency value', () => {
     render(
       <Provider store={store}>
-        <DonateCard currentDonation={10} donationGoal={100} title='' />
+        <DonateCard currentDonation={10} donationGoal={100} />
       </Provider>,
     );
-    expect(screen.getByTestId('donation_value').textContent).toBe('$10 raised of $100 goal');
+    expect(screen.getByTestId('donation_value').textContent).toBe(
+      '$10 raised of $100 goal',
+    );
   });
 });

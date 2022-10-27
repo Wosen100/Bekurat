@@ -1,3 +1,4 @@
+import React from 'react';
 import { InlineShareButtons } from 'sharethis-reactjs';
 
 interface SocialShareProps {
@@ -29,7 +30,7 @@ export default function SocialShareButton({ url }: SocialShareProps) {
           size: 40, // the size of each button (INTEGER)
 
           // OPTIONAL PARAMETERS
-          url: url, // (defaults to current url)
+          url, // (defaults to current url)
           image: 'https://bit.ly/2CMhCMC', // (defaults to og:image or twitter:image)
           description: 'custom text', // (defaults to og:description or twitter:description)
           title: 'custom title', // (defaults to og:title or twitter:title)

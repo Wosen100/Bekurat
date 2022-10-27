@@ -1,19 +1,19 @@
-import React, { ChangeEvent, useState, useEffect} from 'react';
+import React, { ChangeEvent, useState, useEffect } from 'react';
 import { TextField, Button } from '@mui/material';
-import styles from 'styled-components';
+import styled from 'styled-components';
 import { CountryDropdown } from 'react-country-region-selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
 import { createNewDonor } from '../../../store/slices/donorSlice';
 
-const OuterDiv = styles.div`
-padding: 20px;
-border-radius: 20px;
+const OuterDiv = styled.div`
+  padding: 20px;
+  border-radius: 20px;
 `;
 
-const ButtonWrapper = styles.div`
-  padding-top:10px;
-  padding-bottom:10px;
+const ButtonWrapper = styled.div`
+  padding-top: 10px;
+  padding-bottom: 10px;
 `;
 
 const formFields = [
@@ -24,7 +24,7 @@ const formFields = [
 ];
 
 interface Donor {
-  _id: string;
+  id: string;
   fname: string;
   lName: string;
   email: string;
@@ -34,11 +34,16 @@ interface Donor {
 
 interface DonerInfoProp {
   isContinue: boolean;
-  setIsConinue: Function;
+  setIsConinue: (a: boolean) => void;
 }
 
-export default function DonerInformationForm({ isContinue, setIsConinue }: DonerInfoProp) {
-  const isLoading = useSelector((state: RootState) => state.donor.createDonorLoading);
+export default function DonerInformationForm({
+  isContinue,
+  setIsConinue,
+}: DonerInfoProp) {
+  const isLoading = useSelector(
+    (state: RootState) => state.donor.createDonorLoading,
+  );
 
   const [donerObj, setDonerObj] = useState({});
   const [country, setCountry] = useState('');
@@ -53,7 +58,7 @@ export default function DonerInformationForm({ isContinue, setIsConinue }: Doner
   };
 
   const handleSubmitData = () => {
-    dispath(createNewDonor({ ...donerObj, country: country } as Donor));
+    dispath(createNewDonor({ ...donerObj, country } as Donor));
   };
 
   useEffect(() => {
@@ -65,13 +70,21 @@ export default function DonerInformationForm({ isContinue, setIsConinue }: Doner
   return (
     <OuterDiv>
       <ButtonWrapper>
-        {formFields.map(val => (
+        {formFields.map((val) => (
           <div key={val.name} style={{ paddingBottom: '5px' }}>
-            <TextField fullWidth label={val.label} name={val.name} onChange={handleChange} />
+            <TextField
+              fullWidth
+              label={val.label}
+              name={val.name}
+              onChange={handleChange}
+            />
           </div>
         ))}
       </ButtonWrapper>
-      <CountryDropdown value={country} onChange={value => setCountry(value)} />
+      <CountryDropdown
+        value={country}
+        onChange={(value) => setCountry(value)}
+      />
 
       {!isContinue && (
         <ButtonWrapper>
@@ -79,7 +92,7 @@ export default function DonerInformationForm({ isContinue, setIsConinue }: Doner
             <Button
               sx={{ mt: 2 }}
               onClick={handleSubmitData}
-              variant='contained'
+              variant="contained"
               style={{
                 background: 'green',
                 bottom: '10px',

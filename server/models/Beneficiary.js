@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const { default: mongoose } = require('mongoose');
 
 const beneficiarySchema = new mongoose.Schema(
   {
@@ -6,19 +6,23 @@ const beneficiarySchema = new mongoose.Schema(
     address: String,
     image: String,
     description: String,
-    curren_donation: {
+    currentDonation: {
       type: Number,
       default: 0,
     },
-    long_description: String,
-    donation_goal: {
+    longDescription: String,
+    donationGoal: {
       type: Number,
       default: 100000,
     },
   },
   {
-    collection: "beneficiary",
-  }
+    collection: 'beneficiary',
+  },
 );
 
-module.exports = mongoose.model("Beneficiary", beneficiarySchema);
+mongoose.set('toJSON', {
+  virtuals: true,
+});
+
+module.exports = mongoose.model('Beneficiary', beneficiarySchema);

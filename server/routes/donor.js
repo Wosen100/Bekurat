@@ -8,10 +8,10 @@ donorRoute.route("/add").post(function (req, res) {
   let { fName, lName, email, postalCode, country } = req.body;
 
   let newDonor = new Donor();
-  newDonor.first_name = fName;
-  newDonor.last_name = lName;
+  newDonor.firstName = fName;
+  newDonor.lastName = lName;
   newDonor.email = email;
-  newDonor.postal_code = postalCode;
+  newDonor.postalCode = postalCode;
   newDonor.country = country;
 
   newDonor

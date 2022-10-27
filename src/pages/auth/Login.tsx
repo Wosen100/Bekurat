@@ -39,7 +39,7 @@ export default function Login() {
   const [user, setUser] = useState(false);
 
   useEffect(() => {
-    localStorage.getItem('token') && setUser(true);
+    if (localStorage.getItem('token')) setUser(true);
   }, []);
 
   const [error, setError] = useState({
@@ -53,7 +53,7 @@ export default function Login() {
       error: false,
       message: '',
     });
-    const user = {
+    const userObj = {
       email,
       password,
     };
@@ -64,7 +64,7 @@ export default function Login() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(user),
+        body: JSON.stringify(userObj),
       });
 
       const res = await req.json();
@@ -84,19 +84,39 @@ export default function Login() {
         error: true,
         message: 'server error',
       });
-      return;
     }
   };
 
   return (
     <div>
-      <FormWrapper className='form-container'>
-        {user && <Navigate to='/beneficiaries' replace={true} />}
+      <FormWrapper className="form-container">
+        {user && <Navigate to="/beneficiaries" replace />}
         <form onSubmit={submitHandler}>
-          <input type='email' onChange={e => setEmail(e.target.value)} placeholder='Email' />
-          <input type='password' onChange={e => setPassword(e.target.value)} placeholder='Password' />
-          {error.error && <label style={{ color: 'red', background: 'white', padding: '10px' }}>{error.message}</label>}
-          <button style={{ backgroundColor: 'green', color: 'white' }}>
+          <input
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+          />
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+          />
+          {error.error && (
+            <span
+              style={{
+                color: 'red',
+                background: 'white',
+                padding: '10px',
+              }}
+            >
+              {error.message}
+            </span>
+          )}
+          <button
+            type="submit"
+            style={{ backgroundColor: 'green', color: 'white' }}
+          >
             Sign In <br /> ወደ አካውንትዎ በዚህ ይግቡ{' '}
           </button>
         </form>

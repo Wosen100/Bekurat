@@ -1,16 +1,20 @@
-const { default: mongoose } = require("mongoose");
+const { default: mongoose } = require('mongoose');
 
 const donorSchema = new mongoose.Schema(
   {
-    first_name: String,
-    last_name: String,
+    firstName: String,
+    lastName: String,
     email: String,
-    postal_code: String,
+    postalCode: String,
     country: String,
   },
   {
-    collation: "donor",
-  }
+    collation: 'donor',
+  },
 );
 
-module.exports = mongoose.model("Donor", donorSchema);
+mongoose.set('toJSON', {
+  virtuals: true,
+});
+
+module.exports = mongoose.model('Donor', donorSchema);

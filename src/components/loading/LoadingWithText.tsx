@@ -1,18 +1,19 @@
+import React from 'react';
 import { Grid, Typography } from '@mui/material';
+import styled from 'styled-components';
 import LoadingSpinner from '../LoadingSpinner';
-import styles from 'styled-components';
 
-const SpinnerWrapper = styles.div`
-display: flex; 
-justifyContent: center;
-paddingTop:10px;
+const SpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
 `;
 
-const SpinnerGridInnerDiv = styles.div`
-paddingTop: 60px;
-display: flex;
-flexDirection: column;
-alignItems: center;
+const SpinnerGridInnerDiv = styled.div`
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 interface LoadingWithTextProps {
@@ -20,13 +21,20 @@ interface LoadingWithTextProps {
   lowverText: string | boolean;
 }
 
-export default function LoadingWithText({ uppreText, lowverText }: LoadingWithTextProps) {
+export default function LoadingWithText({
+  uppreText,
+  lowverText,
+}: LoadingWithTextProps) {
   return (
-    <Grid container justifyContent={'center'}>
+    <Grid container justifyContent="center">
       <Grid item>
         <SpinnerGridInnerDiv>
-          <Typography style={{ fontSize: '30px', fontWeight: 'bold' }}>{uppreText}</Typography>
-          <SpinnerWrapper style={{ display: 'flex', justifyContent: 'center' }}>
+          <Typography
+            style={{ fontSize: '30px', fontWeight: 'bold' }}
+          >
+            {uppreText}
+          </Typography>
+          <SpinnerWrapper>
             <LoadingSpinner />
           </SpinnerWrapper>
 

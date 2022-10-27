@@ -1,11 +1,18 @@
+import React, { ReactElement } from 'react';
 import Footer from './Footer';
 import Header from './Header';
 
-export default function HeaderAndFooterWrapper(props: any) {
+interface HeaderAndFooterWrapperType {
+  children: ReactElement;
+}
+
+export default function HeaderAndFooterWrapper({
+  children,
+}: HeaderAndFooterWrapperType) {
   return (
     <div>
       <Header />
-      {props.children}
+      {children}
       <Footer />
     </div>
   );

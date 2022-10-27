@@ -11,8 +11,8 @@ beneficiaryRoute.route('/add').post(function (req, res) {
   newBeneficiary.image = image;
   newBeneficiary.address = address;
   newBeneficiary.description = description;
-  newBeneficiary.donation_goal = Number(goal);
-  newBeneficiary.long_description = longDescription;
+  newBeneficiary.donationGoal = Number(goal);
+  newBeneficiary.longDescription = longDescription;
   newBeneficiary
     .save()
     .then(beneficiaryRes => {
@@ -41,10 +41,9 @@ beneficiaryRoute.route('/get').get(function (req, res) {
 });
 
 beneficiaryRoute.route('/donate').put(function (req, res) {
-  let { _id, donation } = req.body;
-
-  Beneficiary.findById(_id, function (err, beneficiary) {
-    beneficiary.curren_donation = parseFloat(beneficiary.curren_donation) + parseFloat(donation);
+  let { id, donation } = req.body;
+  Beneficiary.findById(id, function (err, beneficiary) {
+    beneficiary.currentDonation = beneficiary.currentDonation + parseFloat(donation);
     beneficiary.save().then(newBene => {
       res.send(newBene);
     });

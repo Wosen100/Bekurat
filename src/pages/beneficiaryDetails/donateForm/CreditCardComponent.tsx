@@ -1,4 +1,10 @@
-import React, { FocusEvent, useState, ChangeEvent,useCallback } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, {
+  FocusEvent,
+  useState,
+  ChangeEvent,
+  useCallback,
+} from 'react';
 import ReactCreditCard from '@repay/react-credit-card';
 import '@repay/react-credit-card/dist/react-credit-card.css';
 import { Typography } from '@mui/material';
@@ -13,22 +19,28 @@ export default function CreditCardComponent() {
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
-      setValues(v => ({ ...v, [name]: value }));
+      setValues((v) => ({ ...v, [name]: value }));
     },
     [setValues],
   );
 
   const [focused, setFocus] = useState<any | undefined>(undefined);
   const handleFocus = useCallback(
-    (e: FocusEvent<HTMLInputElement>) => setFocus(e.target.name as string),
+    (e: FocusEvent<HTMLInputElement>) =>
+      setFocus(e.target.name as string),
     [setFocus],
   );
-  const handleBlur = useCallback(() => setFocus(undefined), [setFocus]);
+  const handleBlur = useCallback(
+    () => setFocus(undefined),
+    [setFocus],
+  );
 
   return (
     <form>
       <div>
-        <Typography sx={{ fontWeight: 'bold', mb: 2 }}>Credit or debit</Typography>
+        <Typography sx={{ fontWeight: 'bold', mb: 2 }}>
+          Credit or debit
+        </Typography>
         <fieldset
           style={{
             border: 'none',
@@ -36,10 +48,11 @@ export default function CreditCardComponent() {
             justifyContent: 'space-between',
           }}
         >
-          <label>Name on card</label>
+          <label htmlFor="name">Name on card</label>
           <input
-            data-testid='nameonthcard'
-            name='name'
+            id="name"
+            data-testid="nameonthcard"
+            name="name"
             onChange={handleChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -53,10 +66,11 @@ export default function CreditCardComponent() {
             justifyContent: 'space-between',
           }}
         >
-          <label>Card Number</label>
+          <label htmlFor="number">Card Number</label>
           <input
-            data-testid='cardnumber'
-            name='number'
+            id="number"
+            data-testid="cardnumber"
+            name="number"
             onChange={handleChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -70,11 +84,12 @@ export default function CreditCardComponent() {
             justifyContent: 'space-between',
           }}
         >
-          <label>Expiration</label>
+          <label htmlFor="expiration">Expiration</label>
           <input
-            data-testid='expiration'
-            name='expiration'
-            placeholder='MM/YY'
+            id="expiration"
+            data-testid="expiration"
+            name="expiration"
+            placeholder="MM/YY"
             onChange={handleChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -89,10 +104,11 @@ export default function CreditCardComponent() {
             justifyContent: 'space-between',
           }}
         >
-          <label>CVC</label>
+          <label htmlFor="cvc">CVC</label>
           <input
-            data-testid='cvc'
-            name='cvc'
+            id="cvc"
+            data-testid="cvc"
+            name="cvc"
             onChange={handleChange}
             onFocus={handleFocus}
             onBlur={handleBlur}

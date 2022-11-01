@@ -1,17 +1,18 @@
-import { render, screen } from "@testing-library/react";
-import DonateCard from "./DonateCard";
-import { Provider } from "react-redux";
-import store from "../../store";
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import DonateCard from './DonateCard';
+import store from '../../store';
 
-describe("Donation values", () => {
-  it("Donation values must be with currency value", () => {
+describe('Donation values', () => {
+  it('Donation values must be with currency value', () => {
     render(
       <Provider store={store}>
-        <DonateCard currentDonation={10} donationGoal={100} title="" />
-      </Provider>
+        <DonateCard currentDonation={10} donationGoal={100} />
+      </Provider>,
     );
-    expect(screen.getByTestId("donation_value").textContent).toBe(
-      "$10 raised of $100 goal"
+    expect(screen.getByTestId('donation_value').textContent).toBe(
+      '$10 raised of $100 goal',
     );
   });
 });

@@ -1,32 +1,33 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import LoadingWithText from "../../components/loading/LoadingWithText";
-import SuccessComponent from "../../components/loading/SuccessComponent";
-import { RootState } from "../../store";
+/* eslint-disable  no-nested-ternary */
+import React from 'react';
+import { useSelector } from 'react-redux';
+import LoadingWithText from '../../components/loading/LoadingWithText';
+import SuccessComponent from '../../components/loading/SuccessComponent';
+import { RootState } from '../../store';
 
-import BeneficiaryRegistrationForm from "./registerBeneficiary/BeneficiaryRegistrationForm";
+import BeneficiaryRegistrationForm from './registerBeneficiary/BeneficiaryRegistrationForm';
 
 interface RegisterBeneficiaryProps {
-  setOpen: Function;
+  setOpen: (a: boolean) => void;
 }
 
 export default function RegisterBeneficiary({
   setOpen,
 }: RegisterBeneficiaryProps) {
   const createBeneLoading = useSelector(
-    (state: RootState) => state.bene.createBeneLoading
+    (state: RootState) => state.bene.createBeneLoading,
   );
 
   return (
-    <div style={{ padding: "20px" }}>
-      {createBeneLoading === "idle" ? (
+    <div style={{ padding: '20px' }}>
+      {createBeneLoading === 'idle' ? (
         <BeneficiaryRegistrationForm setOpen={setOpen} />
-      ) : createBeneLoading === "loading" ? (
+      ) : createBeneLoading === 'loading' ? (
         <LoadingWithText
           uppreText="Beneficiary is being registered!"
           lowverText={false}
         />
-      ) : createBeneLoading === "completed" ? (
+      ) : createBeneLoading === 'completed' ? (
         <div>
           <SuccessComponent
             text="Beneficiary is successfully registered."

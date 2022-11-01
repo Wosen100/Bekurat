@@ -10,7 +10,7 @@ donationRoute.route("/create").post(function (req, res) {
   let donation = new Donation();
   donation.donor = donor;
   donation.beneficiary = beneficiary;
-  donation.donation_amount = donationAmount;
+  donation.donationAmount = donationAmount;
 
   donation
     .save()

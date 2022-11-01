@@ -1,12 +1,17 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
+import {
+  createAsyncThunk,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
+import axios from 'axios';
 
-interface Donor {
-  _id: string;
+export interface Donor {
+  id: string;
   fname: string;
   lName: string;
   email: string;
   postalCode: string;
+  country: string;
 }
 
 interface DonorState {
@@ -16,24 +21,27 @@ interface DonorState {
 
 const initialState: DonorState = {
   newDonor: null,
-  createDonorLoading: "idle",
+  createDonorLoading: 'idle',
 };
 
 export const createNewDonor = createAsyncThunk(
-  "donor/create",
-  async (donor: any) => {
-    console.log(donor);
-    const res = await axios.post("http://localhost:5001/donor/add", donor);
-    return res.data.message.donor;
-  }
+  'donor/create',
+  async (donor: Donor) => {
+    try {
+      const res = await axios.post('/donor/add', donor);
+      return res.data.message.donor;
+    } catch {
+      return null;
+    }
+  },
 );
 
 export const DonorSlice = createSlice({
-  name: "donor",
+  name: 'donor',
   initialState,
   reducers: {
-    clearCreateDonorLoading: (state, action) => {
-      state.createDonorLoading = "idle";
+    clearCreateDonorLoading: (state) => {
+      state.createDonorLoading = 'idle';
     },
   },
   extraReducers(builder) {
@@ -41,11 +49,14 @@ export const DonorSlice = createSlice({
       createNewDonor.fulfilled,
       (state, action: PayloadAction<Donor>) => {
         state.newDonor = action.payload;
-        state.createDonorLoading = "completed";
-      }
+        state.createDonorLoading = 'completed';
+      },
     );
-    builder.addCase(createNewDonor.pending, (state, action) => {
-      state.createDonorLoading = "loading";
+    builder.addCase(createNewDonor.pending, (state) => {
+      state.createDonorLoading = 'loading';
+    });
+    builder.addCase(createNewDonor.rejected, (state) => {
+      state.createDonorLoading = 'failed';
     });
   },
 });

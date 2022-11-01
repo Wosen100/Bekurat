@@ -1,17 +1,17 @@
+import React from 'react';
 import {
   InputAdornment,
   TextField,
   Grid,
   Typography,
   Button,
-} from "@mui/material";
-import React from "react";
+} from '@mui/material';
 
 interface DonateValueComponentProps {
   image: string;
   name: string;
-  setDonateValue: Function;
-  handleContinue: Function;
+  setDonateValue: (a: string) => void;
+  handleContinue: () => void;
   isContinue: boolean;
   isEnabled: boolean;
 }
@@ -28,31 +28,41 @@ export default function DonateValueComponent({
     <div>
       <Grid item container>
         <Grid item xs={12} sm={4}>
-          <img src={image} style={{ width: "100%", borderRadius: "2px" }} />
+          <img
+            src={image}
+            style={{ width: '100%', borderRadius: '2px' }}
+            alt={name}
+          />
         </Grid>
-        <Grid item xs={1}></Grid>
+        <Grid item xs={1} />
         <Grid item xs={12} sm={6}>
           <Typography>
-            You're supporing <b>{name}</b>{" "}
+            You&apos;re supporing <b>{name}</b>
           </Typography>
-          <br />
-          <Typography style={{ fontSize: "12px", color: "grey" }}>
-            <i>Your donation will be in support of Kia Slade</i>
+          <Typography
+            style={{
+              marginLeft: '2px',
+              fontSize: '12px',
+              color: 'grey',
+              fontStyle: 'italic',
+            }}
+          >
+            Your donation will be in support of Kia Slade
           </Typography>
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <div style={{ marginTop: "20px" }}>
-          <Typography sx={{ mb: 2 }}>
-            <b>Enter your donation</b>
+        <div style={{ marginTop: '20px' }}>
+          <Typography sx={{ mb: 2, fontWeight: 'bold' }}>
+            Enter your donation
           </Typography>
           <TextField
             onChange={(e) => setDonateValue(e.target.value)}
             InputProps={{
               sx: {
-                "& input": {
-                  textAlign: "right",
-                  fontSize: "30px",
+                '& input': {
+                  textAlign: 'right',
+                  fontSize: '30px',
                 },
               },
               startAdornment: (
@@ -60,16 +70,16 @@ export default function DonateValueComponent({
                   <Grid container justifyContent="center">
                     <Grid item>
                       <Typography
-                        style={{ fontWeight: "bold", color: "black" }}
+                        style={{ fontWeight: 'bold', color: 'black' }}
                       >
                         $
                       </Typography>
                     </Grid>
                     <Grid item>
                       <Typography
-                        style={{ fontWeight: "bold", color: "black" }}
+                        style={{ fontWeight: 'bold', color: 'black' }}
                       >
-                        {" "}
+                        {' '}
                         USD
                       </Typography>
                     </Grid>
@@ -78,28 +88,30 @@ export default function DonateValueComponent({
               ),
               endAdornment: (
                 <InputAdornment position="start">
-                  <Typography style={{ fontSize: "30px" }}>.00</Typography>
+                  <Typography style={{ fontSize: '30px' }}>
+                    .00
+                  </Typography>
                 </InputAdornment>
               ),
             }}
             fullWidth
-            type={"number"}
+            type="number"
           />
         </div>
       </Grid>
-      <br />
-      <Typography style={{ color: "grey" }}>
-        We guarantee you a full refund for up to a year in the rare event that
-        fraud occurs.
+
+      <Typography sx={{ mt: 2, mb: 1 }} style={{ color: 'grey' }}>
+        We guarantee you a full refund for up to a year in the rare
+        event that fraud occurs.
       </Typography>
-      <br />
+
       {!isContinue && (
         <Button
           disabled={!isEnabled}
           onClick={() => handleContinue()}
           variant="contained"
           style={{
-            background: !isEnabled ? "white" : "green",
+            background: !isEnabled ? 'white' : 'green',
           }}
         >
           Continue

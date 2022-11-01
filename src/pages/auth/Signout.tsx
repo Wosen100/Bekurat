@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-type Props = {};
+export default function Signout() {
+  const navigate = useNavigate();
 
-const Signout = (props: Props) => {
   useEffect(() => {
-    localStorage.removeItem("token");
-    window.location.href = "/landing/signin";
-  }, []);
+    localStorage.removeItem('token');
+    navigate('/landing/signin');
+  }, [navigate]);
 
   return <div>You have been Signed out</div>;
-};
-
-export default Signout;
+}

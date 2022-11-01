@@ -1,60 +1,65 @@
-import { Button, Card, Typography } from "@mui/material";
-import LinearProgressBar from "../../components/common/LinearProgressBar";
-import { RWebShare } from "react-web-share";
-import FullScreenDialogCustom from "../../components/common/FullScreenDialogCustom";
-import React from "react";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store";
-import { clearCreateDonorLoading } from "../../store/slices/donorSlice";
-import DonationPage from "./DonationPage";
-import SocialShareButton from "../../components/common/SocialShareIcons";
+import { Button, Card, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { AppDispatch } from '../../store';
+import { clearCreateDonorLoading } from '../../store/slices/donorSlice';
+import LinearProgressBar from '../../components/common/LinearProgressBar';
+import DonationPage from './DonationPage';
+import FullScreenDialogCustom from '../../components/common/FullScreenDialogCustom';
+import SocialShareButton from '../../components/common/SocialShareIcons';
 
 interface DonateCardProps {
   currentDonation: number;
   donationGoal: number;
-  title: string;
 }
+
+const SocialShareWrapper = styled.div`
+  margin-top: 10px;
+  margin-bottom: 20px;
+`;
+
+const StyledSpan = styled.span`
+  color: grey;
+  font-size: 15px;
+  font-weight: normal;
+`;
 
 export default function DonateCard({
   currentDonation,
   donationGoal,
-  title,
 }: DonateCardProps) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
 
   return (
     <Card sx={{ ml: 5, p: 2 }}>
       <Typography
+        sx={{ pb: 2, mt: 2 }}
         data-testid="donation_value"
         style={{
-          fontWeight: "700",
-          marginTop: "10px",
-          fontSize: "18px",
+          fontWeight: '700',
+          fontSize: '18px',
         }}
       >
         ${currentDonation.toLocaleString()}
-        <span
-          style={{
-            color: "grey",
-            fontSize: "15px",
-            fontWeight: "normal",
-          }}
-        >
-          {" "}
+        <StyledSpan>
+          {' '}
           raised of ${donationGoal.toLocaleString()} goal
-        </span>
+        </StyledSpan>
       </Typography>
-      <br />
-      <LinearProgressBar value={(currentDonation / donationGoal) * 100} />
-      <br />
-      <SocialShareButton url="http://localhost:3000/" />
-      <br />
-      <br />
+
+      <LinearProgressBar
+        value={(currentDonation / donationGoal) * 100}
+      />
+      <SocialShareWrapper>
+        <SocialShareButton url="http://localhost:3000/" />
+      </SocialShareWrapper>
+
       <FullScreenDialogCustom
         handleClick={() => {
-          dispatch(clearCreateDonorLoading({}));
+          dispatch(clearCreateDonorLoading());
         }}
         title="Donate"
         open={open}
@@ -65,10 +70,10 @@ export default function DonateCard({
           variant="contained"
           fullWidth
           style={{
-            height: "50px",
-            color: "white",
-            fontWeight: "bold",
-            backgroundColor: "green",
+            height: '50px',
+            color: 'white',
+            fontWeight: 'bold',
+            backgroundColor: 'green',
           }}
         >
           Donate Now

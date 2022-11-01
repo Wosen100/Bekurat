@@ -1,26 +1,46 @@
-import { Button, Card, Grid, Typography } from "@mui/material";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
-import { updateWithDonate } from "../../store/slices/beneficiarySlice";
-import { createDonation } from "../../store/slices/donationSlice";
-import CreditCardComponent from "./donateForm/CreditCardComponent";
-import DonateValueComponent from "./donateForm/DonateValueComponent";
-import DonerInformationForm from "./donateForm/DonerInformationForm";
+import { Button, Card, Grid, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store';
+import { updateWithDonate } from '../../store/slices/beneficiarySlice';
+import { createDonation } from '../../store/slices/donationSlice';
+import CreditCardComponent from './donateForm/CreditCardComponent';
+import DonateValueComponent from './donateForm/DonateValueComponent';
+import DonerInformationForm from './donateForm/DonerInformationForm';
+
+const MainWrapper = styled.div`
+  margin: 0px 5%;
+`;
+
+const YourInfoWrapper = styled.div`
+  margin-bottom: 16px;
+`;
+
+const SpacerDiv = styled.div`
+  margin-bottom: 150px;
+`;
+
+export interface DonateUpdateType {
+  id: string | undefined;
+  donation: number;
+}
 
 export default function DonateForm() {
   const selectedBeneficiary = useSelector(
-    (state: RootState) => state.bene.selectedBeneficiary
+    (state: RootState) => state.bene.selectedBeneficiary,
   );
 
   const dispatch = useDispatch<AppDispatch>();
-  const donor = useSelector((state: RootState) => state.donor.newDonor);
+  const donor = useSelector(
+    (state: RootState) => state.donor.newDonor,
+  );
 
   const { name, image } = selectedBeneficiary!;
-  const [isContinue, setIsConinue] = React.useState(false);
-  const [isContinue2, setIsConinue2] = React.useState(false);
+  const [isContinue, setIsConinue] = useState(false);
+  const [isContinue2, setIsConinue2] = useState(false);
 
-  const [donateValue, setDonateValue] = React.useState(0);
+  const [donateValue, setDonateValue] = useState('0');
 
   const handleContinue = () => {
     setIsConinue(true);
@@ -29,19 +49,22 @@ export default function DonateForm() {
   const handleDonate = () => {
     dispatch(
       createDonation({
-        beneficiary: selectedBeneficiary?._id,
-        donor: donor?._id,
-        donationAmount: donateValue,
-      })
+        beneficiary: selectedBeneficiary?.id,
+        donor: donor?.id,
+        donationAmount: parseInt(donateValue, 10),
+      }),
     );
     dispatch(
-      updateWithDonate({ _id: selectedBeneficiary?._id, donation: donateValue })
+      updateWithDonate({
+        id: selectedBeneficiary?.id,
+        donation: parseInt(donateValue, 10),
+      }),
     );
   };
 
   return (
-    <div style={{ margin: "0px 5%" }}>
-      <Grid sx={{ pt: 10 }} container justifyContent={"center"}>
+    <MainWrapper>
+      <Grid sx={{ pt: 10 }} container justifyContent="center">
         <Grid item container xs={6}>
           <Card sx={{ p: 3 }}>
             <DonateValueComponent
@@ -49,33 +72,31 @@ export default function DonateForm() {
               name={name}
               image={image}
               isContinue={isContinue}
-              isEnabled={donateValue > 0}
+              isEnabled={parseInt(donateValue, 10) > 0}
               setDonateValue={setDonateValue}
             />
             {isContinue && (
               <div>
                 <hr />
-                <br />
-                <Typography>
-                  <b>Your information </b>
-                </Typography>
-                <DonerInformationForm
-                  isContinue={isContinue2}
-                  setIsConinue={setIsConinue2}
-                />
-
-                <br />
+                <YourInfoWrapper>
+                  <Typography sx={{ pt: 2, fontWeight: 'bold' }}>
+                    Your information
+                  </Typography>
+                  <DonerInformationForm
+                    isContinue={isContinue2}
+                    setIsConinue={setIsConinue2}
+                  />
+                </YourInfoWrapper>
                 {isContinue2 && (
                   <div>
                     <CreditCardComponent />
-                    <br />
-                    <br />
                     <Button
+                      sx={{ mt: 3 }}
                       onClick={handleDonate}
                       variant="contained"
                       style={{
-                        background: "green",
-                        bottom: "10px",
+                        background: 'green',
+                        bottom: '10px',
                       }}
                     >
                       Donate
@@ -88,16 +109,20 @@ export default function DonateForm() {
         </Grid>
         <Grid item xs={5}>
           <Card sx={{ p: 2, mx: 2 }}>
-            <Typography style={{ fontSize: "20px" }}>
-              <b> Your donation</b>
+            <Typography
+              style={{ fontSize: '20px', fontWeight: 'bold' }}
+            >
+              Your donation
             </Typography>
-            <Typography style={{ fontSize: "20px", marginTop: "10px" }}>
+            <Typography
+              style={{ fontSize: '20px', marginTop: '10px' }}
+            >
               ${donateValue}.00
             </Typography>
           </Card>
         </Grid>
       </Grid>
-      <div style={{ marginBottom: "150px" }}></div>
-    </div>
+      <SpacerDiv />
+    </MainWrapper>
   );
 }

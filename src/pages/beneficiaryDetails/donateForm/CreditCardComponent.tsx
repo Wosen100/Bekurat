@@ -1,59 +1,56 @@
-import React from "react";
-import ReactCreditCard from "@repay/react-credit-card";
-import "@repay/react-credit-card/dist/react-credit-card.css";
-import { Typography } from "@mui/material";
-
-const formFields = [
-  { label: "Card number", name: "cardnumber", type: "number" },
-  { label: "MM/YY", name: "monthYear", type: "text" },
-];
+/* eslint-disable react/jsx-props-no-spreading */
+import React, {
+  FocusEvent,
+  useState,
+  ChangeEvent,
+  useCallback,
+} from 'react';
+import ReactCreditCard from '@repay/react-credit-card';
+import '@repay/react-credit-card/dist/react-credit-card.css';
+import { Typography } from '@mui/material';
 
 export default function CreditCardComponent() {
-  const [values, setValues] = React.useState({
-    name: "",
-    number: "",
-    expiration: "",
-    cvc: "",
+  const [values, setValues] = useState({
+    name: '',
+    number: '',
+    expiration: '',
+    cvc: '',
   });
-  const handleChange = React.useCallback(
-    (event: any) => {
-      const { name, value } = event.target;
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
       setValues((v) => ({ ...v, [name]: value }));
     },
-    [setValues]
+    [setValues],
   );
 
-  const [focused, setFocus] = React.useState<any | undefined>(undefined);
-  const handleFocus = React.useCallback(
-    (event: any) => setFocus(event.target.name as any),
-    [setFocus]
+  const [focused, setFocus] = useState<any | undefined>(undefined);
+  const handleFocus = useCallback(
+    (e: FocusEvent<HTMLInputElement>) =>
+      setFocus(e.target.name as string),
+    [setFocus],
   );
-  const handleBlur = React.useCallback(() => setFocus(undefined), [setFocus]);
+  const handleBlur = useCallback(
+    () => setFocus(undefined),
+    [setFocus],
+  );
 
   return (
     <form>
-      <div
-        style={
-          {
-            // border: "2px solid green",
-            // padding: "20px",
-            // borderRadius: "20px",
-          }
-        }
-      >
-        <Typography>
-          <b>Credit or debit </b>
+      <div>
+        <Typography sx={{ fontWeight: 'bold', mb: 2 }}>
+          Credit or debit
         </Typography>
-        <br />
         <fieldset
           style={{
-            border: "none",
-            display: "flex",
-            justifyContent: "space-between",
+            border: 'none',
+            display: 'flex',
+            justifyContent: 'space-between',
           }}
         >
-          <label>Name on card</label>
+          <label htmlFor="name">Name on card</label>
           <input
+            id="name"
             data-testid="nameonthcard"
             name="name"
             onChange={handleChange}
@@ -64,13 +61,14 @@ export default function CreditCardComponent() {
         </fieldset>
         <fieldset
           style={{
-            border: "none",
-            display: "flex",
-            justifyContent: "space-between",
+            border: 'none',
+            display: 'flex',
+            justifyContent: 'space-between',
           }}
         >
-          <label>Card Number</label>
+          <label htmlFor="number">Card Number</label>
           <input
+            id="number"
             data-testid="cardnumber"
             name="number"
             onChange={handleChange}
@@ -81,13 +79,14 @@ export default function CreditCardComponent() {
         </fieldset>
         <fieldset
           style={{
-            border: "none",
-            display: "flex",
-            justifyContent: "space-between",
+            border: 'none',
+            display: 'flex',
+            justifyContent: 'space-between',
           }}
         >
-          <label>Expiration</label>
+          <label htmlFor="expiration">Expiration</label>
           <input
+            id="expiration"
             data-testid="expiration"
             name="expiration"
             placeholder="MM/YY"
@@ -99,14 +98,15 @@ export default function CreditCardComponent() {
         </fieldset>
         <fieldset
           style={{
-            marginBottom: "20px",
-            border: "none",
-            display: "flex",
-            justifyContent: "space-between",
+            marginBottom: '20px',
+            border: 'none',
+            display: 'flex',
+            justifyContent: 'space-between',
           }}
         >
-          <label>CVC</label>
+          <label htmlFor="cvc">CVC</label>
           <input
+            id="cvc"
             data-testid="cvc"
             name="cvc"
             onChange={handleChange}

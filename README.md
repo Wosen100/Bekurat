@@ -17,6 +17,7 @@ Use the BLANK_README.md to get started.
 Built With
 A few of the frameworks/libraries that were used to build the project are:
 
+
 - React
 - Express
 - Node.js
@@ -45,26 +46,24 @@ Registering a new beneficiary will be as follows.
 ![App Screenshot](https://github.com/Wosen100/Bekurat/readmeimages/register_new_beneficiary.png)
 
 ## Getting Started
+=======
+[![React][React.js]][React-url]
+[![Express][Express.js]][Express-url]
+Node.js
+React Redux
+Axios
+React Router
+JWT Authentication
+Mongoose
+MongoDB
+EsLint and AirBnb
+json server
+
 
 #### Beneficiary Details
 
 Complete Details of the selected beneficiary will be shown as follows.
 
-![App Screenshot](https://github.com/Wosen100/Bekurat/readmeimages/beneficiary_details.png)
-
-#### Home Page with login
-
-Home page baiscally contained the infor and login/ registration facilities.
-
-![App Screenshot](https://github.com/Wosen100/Bekurat/readmeimages/home_page.png)
-
-#### Donate Page
-
-In the following page, donars can donate for the selected benificiary
-
-![App Screenshot](https://github.com/Wosen100/Bekurat/readmeimages/donate_page.png)
-
-## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.

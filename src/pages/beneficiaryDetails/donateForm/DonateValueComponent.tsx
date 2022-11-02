@@ -47,7 +47,7 @@ export default function DonateValueComponent({
               fontStyle: 'italic',
             }}
           >
-            Your donation will be in support of Kia Slade
+            Your donation will be in support many.
           </Typography>
         </Grid>
       </Grid>

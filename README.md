@@ -37,13 +37,13 @@ Before Getting Started here are the detailed wireframes that was designed.
 
 The list of all beneficiaries will be shown as the following wireframe
 
-![App Screenshot](https://github.com/Wosen100/Bekurat/readmeimages/beneficiaries.png)
+![App Screenshot](https://github.com/Wosen100/Bekurat/blob/development/readmeimages/beneficiaries.png?raw=true)
 
 #### Register new Beneficiary
 
 Registering a new beneficiary will be as follows.
 
-![App Screenshot](https://github.com/Wosen100/Bekurat/readmeimages/register_new_beneficiary.png)
+![App Screenshot](https://github.com/Wosen100/Bekurat/blob/development/readmeimages/register_new_beneficiary.png?raw=true)
 
 ## Getting Started
 =======
